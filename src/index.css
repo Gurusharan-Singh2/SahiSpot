@@ -4,8 +4,8 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme {
-  --color-Primary:#60B5FF;
-  --color-Secondary:#AFDDFF ;
+  --color-Primary:#0046FF;
+  --color-Secondary:#EF7722 ;
   --color-brand: #4f46e5; /* indigo-600 */
   --color-brand-light: #6366f1;
   --color-brand-dark: #3730a3;
