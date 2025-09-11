@@ -13,9 +13,9 @@ export function SignupForm({
   return (
     <form className={cn("flex flex-col gap-6", className)} {...props}>
       <div className="flex flex-col items-center gap-2 text-center">
-        <h1 className="text-2xl font-bold">Signup to your account</h1>
+        <h1 className="text-2xl font-bold text-Primary">Signup to your account</h1>
         <p className="text-muted-foreground text-sm text-balance">
-          Enter your email below to login to your account
+         Please enter your details to create an account
         </p>
       </div>
       <div className="grid gap-6">
@@ -36,7 +36,7 @@ export function SignupForm({
           </div>
           <Input id="password" type="password" required />
         </div>
-        <Button type="submit" className="w-full">
+        <Button type="submit" className="w-full bg-Primary hover:bg-Secondary hover:text-lg transition-all duration-300 rounded-full hover:scale-110">
           Signup
         </Button>
        
@@ -44,7 +44,7 @@ export function SignupForm({
       </div>
       <div className="text-center text-sm">
         Do you have an account?{" "}
-       <a onClick={onLogin} className="underline underline-offset-4">
+       <a onClick={onLogin} className="underline underline-offset-4 mt-4 text-slate-600 hover:text-Secondary font-bold cursor-pointer hover:text-[15px] transition-all duration-300">
         Login
         </a>
       </div>

@@ -39,7 +39,7 @@ export function LoginForm({
       </div>
       <div className="text-center text-sm">
         Don&apos;t have an account?{" "}
-        <a onClick={onSignup} className="underline underline-offset-4">
+        <a onClick={onSignup} className="underline underline-offset-4 mt-4 text-slate-600 hover:text-Secondary font-bold cursor-pointer hover:text-[15px] transition-all duration-300">
           Sign up
         </a>
       </div>
