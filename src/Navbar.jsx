@@ -11,7 +11,7 @@ const Navbar = () => {
         <Link to="Pricing" className="mx-3 hover:text-Primary transition-transform duration-300 hover:-translate-y-2">Pricing</Link>
         <Link to="About" className="mx-3 hover:text-Primary transition-transform duration-300 hover:-translate-y-2">About Us</Link>
       </nav>
-     <Link to="/login-signup" > <button className="bg-Secondary text-white px-4 py-2 rounded-full hover:text-white transition-transform duration-300 hover:translate-0.5"  >
+     <Link to="/login-signup" > <button className="bg-Primary text-white px-4 py-2 rounded-full hover:text-white transition-transform duration-300 hover:translate-0.5"  >
         Login/Signup
       </button></Link>
     </header>
