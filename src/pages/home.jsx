@@ -1,9 +1,13 @@
+import Hero from '@/Hero'
 import React from 'react'
 
-const home = () => {
+const HomePage = () => {
   return (
-    <div>home</div>
+<section className='min-h-screen bg-gray-50'>
+    <Hero/> 
+
+</section>
   )
 }
 
-export default home
+export default HomePage
