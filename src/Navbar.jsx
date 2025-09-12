@@ -1,6 +1,7 @@
 import { useState } from "react";
-import { NavLink, Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { Menu, X } from "lucide-react";
+import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/clerk-react";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -14,27 +15,35 @@ const Navbar = () => {
     <header className="flex top-0 justify-between items-center p-5 shadow absolute w-full z-50 bg-white">
       <h1 className="text-2xl font-bold text-Primary">Sahi Spot</h1>
 
-      <nav className="hidden md:flex">
+      {/* Desktop Nav */}
+      <nav className="hidden md:flex items-center gap-4">
         <NavLink to="/" className={linkClasses}>
           Home
         </NavLink>
-        <NavLink to="Find_Parking" className={linkClasses}>
+        <NavLink to="/Find_Parking" className={linkClasses}>
           Find Parking
         </NavLink>
-        <NavLink to="Pricing" className={linkClasses}>
+        <NavLink to="/Pricing" className={linkClasses}>
           Pricing
         </NavLink>
-        <NavLink to="About" className={linkClasses}>
+        <NavLink to="/About" className={linkClasses}>
           About Us
         </NavLink>
+
+        <SignedOut>
+          <SignInButton mode="modal">
+            <button className="bg-Primary text-white px-4 py-2 rounded-full hover:scale-105 transition">
+              Login / Signup
+            </button>
+          </SignInButton>
+        </SignedOut>
+
+        <SignedIn>
+          <UserButton afterSignOutUrl="/" />
+        </SignedIn>
       </nav>
 
-      <Link to="/login-signup" className="hidden md:block">
-        <button className="bg-Primary text-white px-4 py-2 rounded-full hover:text-white transition-transform duration-300 hover:scale-105">
-          Login/Signup
-        </button>
-      </Link>
-
+      {/* Mobile Menu Toggle */}
       <button
         onClick={() => setIsOpen(!isOpen)}
         className="md:hidden p-2 rounded focus:outline-none"
@@ -42,25 +51,36 @@ const Navbar = () => {
         {isOpen ? <X size={28} /> : <Menu size={28} />}
       </button>
 
+      {/* Mobile Nav Menu */}
       {isOpen && (
         <div className="absolute top-16 left-0 w-full bg-white shadow-md flex flex-col items-center space-y-4 py-5 md:hidden">
           <NavLink to="/" onClick={() => setIsOpen(false)} className={linkClasses}>
             Home
           </NavLink>
-          <NavLink to="Find_Parking" onClick={() => setIsOpen(false)} className={linkClasses}>
+          <NavLink to="/Find_Parking" onClick={() => setIsOpen(false)} className={linkClasses}>
             Find Parking
           </NavLink>
-          <NavLink to="Pricing" onClick={() => setIsOpen(false)} className={linkClasses}>
+          <NavLink to="/Pricing" onClick={() => setIsOpen(false)} className={linkClasses}>
             Pricing
           </NavLink>
-          <NavLink to="About" onClick={() => setIsOpen(false)} className={linkClasses}>
+          <NavLink to="/About" onClick={() => setIsOpen(false)} className={linkClasses}>
             About Us
           </NavLink>
-          <Link to="/login-signup" onClick={() => setIsOpen(false)}>
-            <button className="bg-Primary text-white px-4 py-2 rounded-full hover:scale-105 transition">
-              Login/Signup
-            </button>
-          </Link>
+
+          <SignedOut>
+            <SignInButton mode="modal">
+              <button
+                onClick={() => setIsOpen(false)}
+                className="bg-Primary text-white px-4 py-2 rounded-full hover:scale-105 transition"
+              >
+                Login / Signup
+              </button>
+            </SignInButton>
+          </SignedOut>
+
+          <SignedIn>
+            <UserButton afterSignOutUrl="/" />
+          </SignedIn>
         </div>
       )}
     </header>
