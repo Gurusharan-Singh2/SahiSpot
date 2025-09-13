@@ -31,7 +31,7 @@ export function LoginForm({
           </div>
           <Input id="password" type="password" required />
         </div>
-        <Button type="submit" className="w-full bg-Secondary">
+        <Button type="submit" className="w-full bg-Primary hover:bg-Secondary hover:text-lg transition-all duration-300 rounded-full hover:scale-110">
           Login
         </Button>
       
@@ -39,7 +39,7 @@ export function LoginForm({
       </div>
       <div className="text-center text-sm">
         Don&apos;t have an account?{" "}
-        <a onClick={onSignup} className="underline underline-offset-4">
+        <a onClick={onSignup} className="underline underline-offset-4 mt-4 text-slate-600 hover:text-Secondary font-bold cursor-pointer hover:text-[15px] transition-all duration-300">
           Sign up
         </a>
       </div>

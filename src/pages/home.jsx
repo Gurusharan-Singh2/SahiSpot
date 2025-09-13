@@ -1,5 +1,4 @@
 import Hero from '@/Hero'
-import Working from '@/Working'
 import React from 'react'
 
 const HomePage = () => {
