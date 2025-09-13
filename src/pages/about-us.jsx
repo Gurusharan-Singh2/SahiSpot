@@ -2,8 +2,8 @@ import React from 'react'
 
 const AboutUsPage = () => {
   return (
-    <div>
-      
+    <div className=' '>
+      <h2 className=' text-2xl text-black bg-Primary'>About us page</h2>
     </div>
   )
 }

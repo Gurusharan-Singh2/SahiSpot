@@ -12,8 +12,8 @@ const Navbar = () => {
     }`;
 
   return (
-    <header className="flex top-0 justify-between items-center p-5 shadow absolute w-full z-50 bg-white">
-      <h1 className="text-2xl font-bold text-Primary">Sahi Spot</h1>
+    <header className="flex top-0 justify-between items-center p-5 shadow sticky w-full z-50 ">
+      <h1 className="text-2xl font-bold text-Primary ">Sahi Spot</h1>
 
       {/* Desktop Nav */}
       <nav className="hidden md:flex items-center gap-4">
@@ -26,7 +26,7 @@ const Navbar = () => {
         <NavLink to="/Pricing" className={linkClasses}>
           Pricing
         </NavLink>
-        <NavLink to="/About" className={linkClasses}>
+        <NavLink to="/about-us" className={linkClasses}>
           About Us
         </NavLink>
 
@@ -51,7 +51,6 @@ const Navbar = () => {
         {isOpen ? <X size={28} /> : <Menu size={28} />}
       </button>
 
-      {/* Mobile Nav Menu */}
       {isOpen && (
         <div className="absolute top-16 left-0 w-full bg-white shadow-md flex flex-col items-center space-y-4 py-5 md:hidden">
           <NavLink to="/" onClick={() => setIsOpen(false)} className={linkClasses}>
@@ -63,7 +62,7 @@ const Navbar = () => {
           <NavLink to="/Pricing" onClick={() => setIsOpen(false)} className={linkClasses}>
             Pricing
           </NavLink>
-          <NavLink to="/About" onClick={() => setIsOpen(false)} className={linkClasses}>
+          <NavLink to="/about-us" onClick={() => setIsOpen(false)} className={linkClasses}>
             About Us
           </NavLink>
 

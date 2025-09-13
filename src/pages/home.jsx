@@ -1,4 +1,4 @@
-import Hero from '@/Hero'
+import Hero from '@/components/Hero'
 import React from 'react'
 
 const HomePage = () => {
