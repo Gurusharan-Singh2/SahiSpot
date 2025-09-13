@@ -12,7 +12,7 @@ const Navbar = () => {
     }`;
 
   return (
-    <header className="flex top-0 justify-between items-center p-5 shadow sticky w-full z-50 ">
+    <header className="flex top-0 bg-white justify-between items-center p-3 px-10 shadow sticky w-full z-50 ">
       <h1 className="text-2xl font-bold text-Primary ">Sahi Spot</h1>
 
       {/* Desktop Nav */}
