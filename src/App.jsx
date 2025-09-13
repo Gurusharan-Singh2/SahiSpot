@@ -5,10 +5,11 @@ import Hero from './Hero'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import HomePage from './pages/home'
 import Footer from './Footer'
+import Working from './Working'
 
 const App = () => {
   return (
-    <div className='min-h-screen w-screen '>
+    <div className='min-h-screen w-screen bg-gray-50'>
       <BrowserRouter>
             <Navbar/>
 
@@ -20,7 +21,7 @@ const App = () => {
       </Routes>
       </BrowserRouter>
       <Footer/>
-    {/* <LoginPage/> */}
+     
     </div>
   )
 }

@@ -1,6 +1,6 @@
 const Hero = () => {
   return (
-    <section className="text-center py-16 bg-gray-50 min-h-screen flex items-center w-full justify-center ">
+    <section className="text-center pt-16 bg-gray-50 min-h-[50vh] mt-10 flex items-center w-full justify-center ">
     <div className="flex flex-col gap-6 justify-center">
         <h2 className="text-3xl font-semibold mb-4 mt-8">
         Find your Sahi Spot, Anytime, Anywhere.
