@@ -9,7 +9,7 @@ import AboutUsPage from './pages/about-us'
 
 const App = () => {
   return (
-    <div className='min-h-screen w-screen '>
+    <div className='min-h-screen  pb-2 '>
       <BrowserRouter>
         <Navbar />
 
