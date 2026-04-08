@@ -1,163 +1,125 @@
-import { Search, MapPin, CreditCard, ShieldCheck, Clock, Smartphone } from 'lucide-react';
-import { motion } from 'framer-motion';
+import { motion } from "framer-motion";
+import {
+  ArrowRight,
+  CreditCard,
+  LineChart,
+  MapPinned,
+  TimerReset,
+} from "lucide-react";
+import { Link } from "react-router-dom";
 
-const features = [
-    {
-        icon: <Search className="w-6 h-6 text-blue-600" />,
-        title: "Smart Search",
-        desc: "Find the nearest parking spot in seconds with our real-time map.",
-        color: "bg-blue-50"
-    },
-    {
-        icon: <MapPin className="w-6 h-6 text-red-600" />,
-        title: "Exact Location",
-        desc: "Get precise navigation to your reserved spot without confusion.",
-        color: "bg-red-50"
-    },
-    {
-        icon: <CreditCard className="w-6 h-6 text-green-600" />,
-        title: "Seamless Payment",
-        desc: "Pay securely online and skip the cash hassle at the gate.",
-        color: "bg-green-50"
-    },
-    {
-        icon: <ShieldCheck className="w-6 h-6 text-purple-600" />,
-        title: "Secure Parking",
-        desc: "Verified parking locations ensuring your vehicle's safety.",
-        color: "bg-purple-50"
-    }
+const featureCards = [
+  {
+    icon: MapPinned,
+    title: "Discover live spaces",
+    description: "See available parking hubs on a real map instead of guessing from flat lists.",
+  },
+  {
+    icon: TimerReset,
+    title: "Reserve before arrival",
+    description: "Choose the right slot and arrive with less uncertainty, less circling, and less stress.",
+  },
+  {
+    icon: CreditCard,
+    title: "Pay with less friction",
+    description: "Move from booking to payment inside the same polished driver flow.",
+  },
+  {
+    icon: LineChart,
+    title: "Run owner operations",
+    description: "Track occupancy, manage slots, and present parking inventory in a premium interface.",
+  },
 ];
 
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.2
-    }
-  }
-};
+const steps = [
+  "Search nearby parking with map-first discovery",
+  "Compare pricing, slot count, and fit for your vehicle",
+  "Book, pay, and navigate with fewer clicks",
+];
 
-const itemVariants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: { opacity: 1, y: 0 }
-};
+export default function Working() {
+  return (
+    <section className="px-4 pb-16 pt-8 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-7xl space-y-8">
+        <div className="grid gap-6 lg:grid-cols-[0.9fr_1.1fr]">
+          <div className="rounded-[2rem] border border-white/10 bg-white/[0.04] p-6 backdrop-blur">
+            <p className="text-xs font-semibold uppercase tracking-[0.3em] text-emerald-300">
+              Why it works
+            </p>
+            <h2 className="mt-3 text-3xl font-bold text-white sm:text-4xl">
+              A darker, calmer product surface for a messy real-world problem.
+            </h2>
+            <p className="mt-4 max-w-xl text-base leading-7 text-slate-300">
+              SahiSpot is designed to cut noise. Drivers get clarity. Owners get control.
+              Everyone gets a cleaner journey from discovery to revenue.
+            </p>
 
-const Working = () => (
-  <section className="py-24 bg-white relative">
-    <div className="container mx-auto px-4">
-        <div className="text-center max-w-2xl mx-auto mb-16">
-            <motion.h2 
-              initial={{ opacity: 0, y: 10 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="text-Primary font-semibold tracking-wide uppercase text-sm mb-3"
-            >
-              How It Works
-            </motion.h2>
-            <motion.h3 
-              initial={{ opacity: 0, y: 10 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.1 }}
-              className="text-4xl font-bold text-gray-900 mb-4"
-            >
-              Parking made simple.
-            </motion.h3>
-            <motion.p 
-              initial={{ opacity: 0, y: 10 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.2 }}
-              className="text-gray-600 text-lg"
-            >
-              Experience the easiest way to park your car. No tickets, no cash, no stress.
-            </motion.p>
+            <div className="mt-8 space-y-3">
+              {steps.map((step, index) => (
+                <div
+                  key={step}
+                  className="flex items-center gap-4 rounded-[1.4rem] border border-white/10 bg-slate-950/50 p-4"
+                >
+                  <div className="flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-r from-orange-500 to-red-500 text-sm font-semibold text-white">
+                    {index + 1}
+                  </div>
+                  <p className="text-sm text-slate-200 sm:text-base">{step}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="grid gap-4 sm:grid-cols-2">
+            {featureCards.map(({ icon: Icon, title, description }, index) => (
+              <motion.div
+                key={title}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.08 }}
+                whileHover={{ y: -6 }}
+                className="rounded-[1.8rem] border border-white/10 bg-[linear-gradient(180deg,rgba(15,23,42,0.82),rgba(2,6,23,0.72))] p-6 shadow-[0_20px_60px_-30px_rgba(0,0,0,0.95)]"
+              >
+                <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-white/[0.06]">
+                  <Icon className="h-6 w-6 text-orange-300" />
+                </div>
+                <h3 className="mt-5 text-xl font-semibold text-white">{title}</h3>
+                <p className="mt-3 text-sm leading-7 text-slate-400">{description}</p>
+              </motion.div>
+            ))}
+          </div>
         </div>
 
-        <motion.div 
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          className="grid md:grid-cols-4 gap-8"
-        >
-            {features.map((feature, index) => (
-                <motion.div 
-                  key={index} 
-                  variants={itemVariants}
-                  whileHover={{ y: -10, transition: { duration: 0.2 } }}
-                  className="group p-8 rounded-3xl border border-gray-100 bg-white hover:shadow-xl transition-all duration-300"
-                >
-                    <div className={`w-14 h-14 rounded-2xl ${feature.color} flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300`}>
-                        {feature.icon}
-                    </div>
-                    <h4 className="text-xl font-bold text-gray-900 mb-3">{feature.title}</h4>
-                    <p className="text-gray-500 leading-relaxed">
-                        {feature.desc}
-                    </p>
-                </motion.div>
-            ))}
-        </motion.div>
+        <div className="grid gap-6 rounded-[2rem] border border-white/10 bg-[linear-gradient(90deg,rgba(15,23,42,0.9),rgba(17,24,39,0.84))] p-6 lg:grid-cols-[1fr_auto] lg:items-center">
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-[0.28em] text-orange-300">
+              Ready to move
+            </p>
+            <h3 className="mt-3 text-3xl font-semibold text-white">
+              Bring the dark premium experience across discovery, booking, and parking operations.
+            </h3>
+            <p className="mt-3 max-w-3xl text-base leading-7 text-slate-300">
+              Use SahiSpot to modernize how parking looks and feels for both drivers and operators.
+            </p>
+          </div>
 
-        <motion.div 
-          initial={{ opacity: 0, scale: 0.95 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-          className="mt-24 bg-gray-900 rounded-[2.5rem] p-12 md:p-20 relative overflow-hidden text-center md:text-left"
-        >
-            <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-gray-800 to-transparent opacity-50 hidden md:block"></div>
-            <div className="relative z-10 grid md:grid-cols-2 gap-12 items-center">
-                <div>
-                    <h3 className="text-3xl md:text-4xl font-bold text-white mb-6">Ready to park smarter?</h3>
-                    <p className="text-gray-400 text-lg mb-8 max-w-md">
-                        Join thousands of drivers who save time and money with Sahi Spot. Download the app or start booking now.
-                    </p>
-                    <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
-                        <motion.button 
-                          whileHover={{ scale: 1.05 }}
-                          whileTap={{ scale: 0.95 }}
-                          className="bg-Primary text-white px-8 py-4 rounded-xl font-bold hover:bg-red-600 transition shadow-lg shadow-red-900/20"
-                        >
-                            Get Started Now
-                        </motion.button>
-                        <motion.button 
-                          whileHover={{ scale: 1.05 }}
-                          whileTap={{ scale: 0.95 }}
-                          className="bg-white/10 backdrop-blur-md text-white px-8 py-4 rounded-xl font-bold hover:bg-white/20 transition border border-white/10"
-                        >
-                            Learn More
-                        </motion.button>
-                    </div>
-                </div>
-                <div className="relative hidden md:block">
-                     {/* Decorative abstract graphic */}
-                     <div className="grid grid-cols-2 gap-4 opacity-80">
-                        <motion.div 
-                          animate={{ y: [0, -10, 0] }}
-                          transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-                          className="bg-gray-800 p-6 rounded-2xl"
-                        >
-                            <Clock className="text-Primary w-8 h-8 mb-2" />
-                            <div className="h-2 w-16 bg-gray-700 rounded mb-2"></div>
-                            <div className="h-2 w-24 bg-gray-700 rounded"></div>
-                        </motion.div>
-                        <motion.div 
-                          animate={{ y: [0, 10, 0] }}
-                          transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-                          className="bg-gray-800 p-6 rounded-2xl mt-8"
-                        >
-                            <Smartphone className="text-blue-500 w-8 h-8 mb-2" />
-                            <div className="h-2 w-16 bg-gray-700 rounded mb-2"></div>
-                            <div className="h-2 w-24 bg-gray-700 rounded"></div>
-                        </motion.div>
-                     </div>
-                </div>
-            </div>
-        </motion.div>
-    </div>
-  </section>
-);
-
-export default Working;
+          <div className="flex flex-col gap-3 sm:flex-row">
+            <Link
+              to="/find-parking"
+              className="inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-orange-500 via-red-500 to-orange-500 px-6 py-3 text-sm font-semibold text-white transition hover:brightness-110"
+            >
+              Open map
+              <ArrowRight className="h-4 w-4" />
+            </Link>
+            <Link
+              to="/contact-us"
+              className="inline-flex items-center justify-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-6 py-3 text-sm font-semibold text-slate-200 transition hover:bg-white/[0.08]"
+            >
+              Contact us
+            </Link>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}

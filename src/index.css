@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap");
 @import "tailwindcss";
 @import "tw-animate-css";
 @plugin "tailwindcss-animate";
@@ -5,15 +6,15 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme {
-  --font-sans: 'Inter', system-ui, sans-serif;
+  --font-sans: 'Poppins', system-ui, sans-serif;
   
   --color-Primary: #E62727;
   --color-Primary-hover: #cc1f1f;
   --color-Secondary: #8C1007;
   
-  --color-surface: #ffffff;
-  --color-surface-dim: #f8fafc;
-  --color-surface-glass: rgba(255, 255, 255, 0.8);
+  --color-surface: #08111f;
+  --color-surface-dim: #030712;
+  --color-surface-glass: rgba(255, 255, 255, 0.04);
   
   --shadow-glass: 0 4px 30px rgba(0, 0, 0, 0.1);
   --backdrop-blur: 10px;
@@ -24,11 +25,11 @@
 
 @layer utilities {
   .glass {
-    @apply bg-white/70 backdrop-blur-lg border border-white/20 shadow-xl;
+    @apply border border-white/10 bg-white/[0.04] shadow-xl backdrop-blur-lg;
   }
   
   .glass-card {
-     @apply bg-white/90 backdrop-blur-sm border border-gray-100 shadow-sm hover:shadow-md transition-all duration-300;
+     @apply border border-white/10 bg-white/[0.04] shadow-sm backdrop-blur-sm transition-all duration-300 hover:shadow-md;
   }
 
   .text-gradient {
@@ -36,18 +37,24 @@
   }
   
   /* Custom Scrollbar */
+  .custom-scrollbar {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(249, 115, 22, 0.75) rgba(255, 255, 255, 0.06);
+  }
   .custom-scrollbar::-webkit-scrollbar {
-    width: 6px;
+    width: 8px;
   }
   .custom-scrollbar::-webkit-scrollbar-track {
-    background: transparent; 
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 999px;
   }
   .custom-scrollbar::-webkit-scrollbar-thumb {
-    background: #e2e8f0; 
-    border-radius: 10px;
+    background: linear-gradient(180deg, rgba(251, 146, 60, 0.95), rgba(239, 68, 68, 0.9));
+    border-radius: 999px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
   }
   .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-    background: #cbd5e1; 
+    background: linear-gradient(180deg, rgba(253, 186, 116, 1), rgba(248, 113, 113, 0.95));
   }
 }
 
@@ -56,6 +63,31 @@
   font-variation-settings: "opsz" 32;
 }
 
+html,
+body,
+#root {
+  min-height: 100%;
+}
+
 body {
-  @apply bg-gray-50 text-gray-900 antialiased;
+  @apply bg-[#030712] text-slate-100 antialiased;
+}
+
+.leaflet-container {
+  font-family: inherit;
+  background: #dbeafe;
+}
+
+.leaflet-control-attribution {
+  font-size: 10px;
+}
+
+.leaflet-popup-content-wrapper,
+.leaflet-popup-tip {
+  background: transparent;
+  box-shadow: none;
+}
+
+.leaflet-popup-content {
+  margin: 0;
 }
