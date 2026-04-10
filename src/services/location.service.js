@@ -28,6 +28,13 @@ export const locationService = {
     return normalizeLocations(response.data);
   },
 
+  searchLocations: async ({ query, page = 1, limit = 20 } = {}) => {
+    const response = await api.get('/parking/locations/search', {
+      params: { query, page, limit },
+    });
+    return normalizeLocations(response.data);
+  },
+
   getLocationById: async (id) => {
     const response = await api.get(`/parking/locations/${id}`);
     return normalizeLocation(extractPayload(response.data));

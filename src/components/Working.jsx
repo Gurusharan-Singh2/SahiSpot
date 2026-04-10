@@ -1,57 +1,77 @@
 import { motion } from "framer-motion";
 import {
   ArrowRight,
+  CarFront,
   CreditCard,
   LineChart,
   MapPinned,
+  Shield,
   TimerReset,
+  Users,
 } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const featureCards = [
   {
     icon: MapPinned,
-    title: "Discover live spaces",
-    description: "See available parking hubs on a real map instead of guessing from flat lists.",
+    title: "Map-first discovery",
+    description: "Users can understand nearby options faster with live location context, not confusing lists.",
   },
   {
     icon: TimerReset,
-    title: "Reserve before arrival",
-    description: "Choose the right slot and arrive with less uncertainty, less circling, and less stress.",
+    title: "Faster decision making",
+    description: "Parking availability, walking time, and price are surfaced early so booking feels simpler.",
   },
   {
     icon: CreditCard,
-    title: "Pay with less friction",
-    description: "Move from booking to payment inside the same polished driver flow.",
+    title: "One clear checkout",
+    description: "Booking and payment live in a single journey that reduces friction and drop-off.",
   },
   {
     icon: LineChart,
-    title: "Run owner operations",
-    description: "Track occupancy, manage slots, and present parking inventory in a premium interface.",
+    title: "Operational clarity",
+    description: "Owners can manage occupancy, listings, and performance from a cleaner workspace.",
   },
 ];
 
 const steps = [
-  "Search nearby parking with map-first discovery",
-  "Compare pricing, slot count, and fit for your vehicle",
-  "Book, pay, and navigate with fewer clicks",
+  "Search nearby parking from a map that feels familiar on mobile.",
+  "Compare price, distance, and slot availability at a glance.",
+  "Book confidently and arrive with navigation and confirmation ready.",
+];
+
+const useCases = [
+  { icon: CarFront, title: "Daily commuters", text: "Find reliable parking before office hours get hectic." },
+  { icon: Users, title: "Families and shoppers", text: "Pick spots closer to your destination with less stress." },
+  { icon: Shield, title: "Property owners", text: "Turn parking inventory into a managed digital product." },
+];
+
+const testimonials = [
+  {
+    quote: "The flow feels easy. I can check nearby parking and confirm in less than a minute.",
+    author: "Rohit, daily commuter",
+  },
+  {
+    quote: "It finally feels like a real service, not a rough parking listing tool.",
+    author: "Neha, weekend city driver",
+  },
 ];
 
 export default function Working() {
   return (
-    <section className="px-4 pb-16 pt-8 sm:px-6 lg:px-8">
-      <div className="mx-auto max-w-7xl space-y-8">
-        <div className="grid gap-6 lg:grid-cols-[0.9fr_1.1fr]">
+    <section className="px-3 pb-18 pt-8 sm:px-5 lg:px-6 xl:px-8">
+      <div className="mx-auto max-w-[90rem] space-y-8">
+        <div className="grid gap-6 lg:grid-cols-[0.95fr_1.05fr]">
           <div className="rounded-[2rem] border border-white/10 bg-white/[0.04] p-6 backdrop-blur">
             <p className="text-xs font-semibold uppercase tracking-[0.3em] text-emerald-300">
-              Why it works
+              User-friendly by design
             </p>
             <h2 className="mt-3 text-3xl font-bold text-white sm:text-4xl">
-              A darker, calmer product surface for a messy real-world problem.
+              A product journey that explains itself in seconds.
             </h2>
             <p className="mt-4 max-w-xl text-base leading-7 text-slate-300">
-              SahiSpot is designed to cut noise. Drivers get clarity. Owners get control.
-              Everyone gets a cleaner journey from discovery to revenue.
+              Good visuals matter, but trust and clarity matter more. This experience now leads
+              users from discovery to booking with less effort and fewer confusing choices.
             </p>
 
             <div className="mt-8 space-y-3">
@@ -90,16 +110,49 @@ export default function Working() {
           </div>
         </div>
 
+        <div className="grid gap-6 lg:grid-cols-[1.05fr_0.95fr]">
+          <div className="rounded-[2rem] border border-white/10 bg-[linear-gradient(180deg,rgba(12,18,31,0.92),rgba(5,10,20,0.88))] p-6">
+            <p className="text-xs font-semibold uppercase tracking-[0.28em] text-orange-300">
+              Built for real use
+            </p>
+            <div className="mt-5 grid gap-4 md:grid-cols-3">
+              {useCases.map(({ icon: Icon, title, text }) => (
+                <div key={title} className="rounded-[1.5rem] border border-white/10 bg-white/[0.04] p-5">
+                  <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-orange-500/10">
+                    <Icon className="h-5 w-5 text-orange-300" />
+                  </div>
+                  <h3 className="mt-4 text-lg font-semibold text-white">{title}</h3>
+                  <p className="mt-2 text-sm leading-6 text-slate-400">{text}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="rounded-[2rem] border border-white/10 bg-white/[0.04] p-6 backdrop-blur">
+            <p className="text-xs font-semibold uppercase tracking-[0.28em] text-emerald-300">
+              What users should feel
+            </p>
+            <div className="mt-5 space-y-4">
+              {testimonials.map((item) => (
+                <div key={item.author} className="rounded-[1.5rem] border border-white/10 bg-slate-950/50 p-5">
+                  <p className="text-base leading-7 text-slate-200">&quot;{item.quote}&quot;</p>
+                  <p className="mt-4 text-sm font-medium text-slate-400">{item.author}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
         <div className="grid gap-6 rounded-[2rem] border border-white/10 bg-[linear-gradient(90deg,rgba(15,23,42,0.9),rgba(17,24,39,0.84))] p-6 lg:grid-cols-[1fr_auto] lg:items-center">
           <div>
             <p className="text-xs font-semibold uppercase tracking-[0.28em] text-orange-300">
               Ready to move
             </p>
             <h3 className="mt-3 text-3xl font-semibold text-white">
-              Bring the dark premium experience across discovery, booking, and parking operations.
+              Turn SahiSpot into a product people trust from the first screen.
             </h3>
             <p className="mt-3 max-w-3xl text-base leading-7 text-slate-300">
-              Use SahiSpot to modernize how parking looks and feels for both drivers and operators.
+              The interface now speaks more clearly, guides action better, and feels closer to a launch-ready platform.
             </p>
           </div>
 
@@ -115,7 +168,7 @@ export default function Working() {
               to="/contact-us"
               className="inline-flex items-center justify-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-6 py-3 text-sm font-semibold text-slate-200 transition hover:bg-white/[0.08]"
             >
-              Contact us
+              Talk to us
             </Link>
           </div>
         </div>

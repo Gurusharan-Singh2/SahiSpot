@@ -61,6 +61,13 @@
 :root {
   font-feature-settings: "cv11", "ss01";
   font-variation-settings: "opsz" 32;
+  font-size: 15px;
+}
+
+@media (min-width: 1280px) {
+  :root {
+    font-size: 14px;
+  }
 }
 
 html,
@@ -76,6 +83,14 @@ body {
 .leaflet-container {
   font-family: inherit;
   background: #dbeafe;
+  z-index: 0;
+}
+
+.leaflet-pane,
+.leaflet-top,
+.leaflet-bottom,
+.leaflet-control {
+  z-index: 1;
 }
 
 .leaflet-control-attribution {
@@ -90,4 +105,25 @@ body {
 
 .leaflet-popup-content {
   margin: 0;
+}
+
+.sahispot-popup-calm .leaflet-popup-content-wrapper {
+  background: transparent;
+  border-radius: 16px;
+  box-shadow: none;
+  padding: 0;
+}
+
+.sahispot-popup-calm .leaflet-popup-tip {
+  background: white;
+  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.12);
+}
+
+.sahispot-popup-calm .leaflet-popup-close-button {
+  color: #64748b;
+  padding: 8px 10px 0 0;
+}
+
+.sahispot-popup-calm .leaflet-popup-close-button:hover {
+  color: #0f172a;
 }

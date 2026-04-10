@@ -27,4 +27,17 @@ export const bookingService = {
 
     return normalizeBookings(response.data);
   },
+
+  extendBooking: async (bookingId, extraHours) => {
+    const response = await api.post(`/parking/bookings/${bookingId}/extend`, {
+      extra_hours: extraHours,
+    });
+    return normalizeBooking(extractPayload(response.data));
+  },
+
+  checkoutBooking: async (bookingId) => {
+    const response = await api.post(`/parking/bookings/${bookingId}/checkout`);
+    return normalizeBooking(extractPayload(response.data));
+  },
 };
+

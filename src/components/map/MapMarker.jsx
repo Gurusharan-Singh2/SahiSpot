@@ -1,36 +1,83 @@
-import { useEffect, useRef } from "react";
 import L from "leaflet";
-import { Marker, Popup } from "react-leaflet";
-import MapPopup from "@/components/map/MapPopup";
+import { Marker } from "react-leaflet";
 
-const markerColorMap = {
-  car: ["#0ea5e9", "#22d3ee"],
-  bike: ["#d946ef", "#ec4899"],
-  ev: ["#10b981", "#84cc16"],
+const typeConfig = {
+  car: {
+    color: "#2563eb",
+    bg: "#1e40af",
+    glow: "rgba(37,99,235,0.45)",
+    icon: "🚗",
+  },
+  bike: {
+    color: "#7c3aed",
+    bg: "#5b21b6",
+    glow: "rgba(124,58,237,0.45)",
+    icon: "🏍️",
+  },
+  ev: {
+    color: "#059669",
+    bg: "#065f46",
+    glow: "rgba(5,150,105,0.45)",
+    icon: "⚡",
+  },
+  truck: {
+    color: "#d97706",
+    bg: "#92400e",
+    glow: "rgba(217,119,6,0.45)",
+    icon: "🚛",
+  },
 };
 
-const buildMarkerHtml = (type, highlighted) => {
-  const [startColor, endColor] = markerColorMap[type] || markerColorMap.car;
-  const size = highlighted ? 64 : 56;
-  const innerSize = highlighted ? 42 : 36;
+const buildMarkerHtml = (type, price, selected) => {
+  const cfg = typeConfig[type] || typeConfig.car;
+  const scale = selected ? 1.18 : 1;
+  const shadow = selected
+    ? `0 8px 28px ${cfg.glow}, 0 2px 8px rgba(0,0,0,0.35)`
+    : `0 4px 16px ${cfg.glow}, 0 2px 6px rgba(0,0,0,0.28)`;
+
+  const pulse = selected
+    ? `<span style="position:absolute;inset:-6px;border-radius:999px 999px 999px 0;border:2px solid ${cfg.color};opacity:0.55;animation:sahiPulse 1.4s ease-in-out infinite;"></span>`
+    : "";
+
+  const priceTag =
+    price > 0
+      ? `<span style="position:absolute;bottom:-18px;left:50%;transform:translateX(-50%);white-space:nowrap;background:rgba(2,6,23,0.88);border:1px solid ${cfg.color}44;border-radius:4px;padding:1px 5px;font-size:9px;font-weight:700;color:${cfg.color};letter-spacing:0.03em;">₹${price}/hr</span>`
+      : "";
 
   return `
-  <div class="relative">
-    <div style="position:absolute;left:50%;top:${size - 20}px;height:14px;width:14px;transform:translateX(-50%) rotate(45deg);border-radius:4px;background:rgba(15,23,42,0.18);filter:blur(2px);"></div>
-    <div style="display:flex;height:${innerSize}px;width:${innerSize}px;align-items:center;justify-content:center;border-radius:999px;border:2px solid rgba(255,255,255,0.92);background:linear-gradient(135deg, ${startColor}, ${endColor});color:white;font-size:10px;font-weight:900;letter-spacing:0.2em;box-shadow:0 18px 40px -16px rgba(15,23,42,0.7);">
-      ${type === "ev" ? "EV" : type[0].toUpperCase()}
+    <style>
+      @keyframes sahiPulse {
+        0%,100% { transform:scale(1); opacity:0.55; }
+        50% { transform:scale(1.22); opacity:0.2; }
+      }
+    </style>
+    <div style="position:relative;display:flex;flex-direction:column;align-items:center;transform:scale(${scale});transform-origin:bottom center;transition:transform 0.18s ease;">
+      ${pulse}
+      <div style="
+        display:flex;align-items:center;justify-content:center;
+        background:linear-gradient(145deg,${cfg.color},${cfg.bg});
+        border:2px solid rgba(255,255,255,0.22);
+        border-radius:10px 10px 10px 0;
+        padding:4px 7px;
+        box-shadow:${shadow};
+        min-width:36px;
+        position:relative;
+      ">
+        <span style="font-size:13px;line-height:1;">${cfg.icon}</span>
+      </div>
+      <div style="width:0;height:0;border-left:5px solid transparent;border-right:5px solid transparent;border-top:7px solid ${cfg.color};margin-top:-1px;"></div>
+      ${priceTag}
     </div>
-  </div>
-`;
+  `;
 };
 
-const createMarkerIcon = (type, highlighted) =>
+const createMarkerIcon = (type, price, selected) =>
   L.divIcon({
-    className: "sahispot-marker",
-    html: buildMarkerHtml(type, highlighted),
-    iconSize: highlighted ? [64, 64] : [56, 56],
-    iconAnchor: highlighted ? [32, 54] : [28, 46],
-    popupAnchor: [0, -42],
+    className: "sahispot-parking-marker",
+    html: buildMarkerHtml(type, price, selected),
+    iconSize: [46, 52],
+    iconAnchor: [23, 52],
+    popupAnchor: [0, -54],
   });
 
 export default function MapMarker({
@@ -39,37 +86,20 @@ export default function MapMarker({
   isHovered,
   onSelect,
   onHover,
-  onBookNow,
 }) {
-  const markerRef = useRef(null);
   const primaryType = location.vehicleTypes?.[0] || "car";
-  const highlighted = isSelected || isHovered;
-
-  useEffect(() => {
-    const marker = markerRef.current;
-    if (!marker) {
-      return;
-    }
-
-    if (highlighted) {
-      marker.openPopup();
-    }
-  }, [highlighted]);
+  const price = Math.round(location.pricePerHour || location.price || 0);
 
   return (
     <Marker
-      ref={markerRef}
       position={[location.latitude, location.longitude]}
-      icon={createMarkerIcon(primaryType, highlighted)}
+      icon={createMarkerIcon(primaryType, price, isSelected || isHovered)}
       eventHandlers={{
-        click: () => onSelect(location.id),
+        click: () => onSelect(location),
         mouseover: () => onHover(location.id),
         mouseout: () => onHover(null),
       }}
-    >
-      <Popup closeButton={false} autoPan className="sahispot-popup" minWidth={288}>
-        <MapPopup location={location} highlighted={highlighted} onBookNow={onBookNow} />
-      </Popup>
-    </Marker>
+      zIndexOffset={isSelected ? 1000 : isHovered ? 500 : 0}
+    />
   );
 }

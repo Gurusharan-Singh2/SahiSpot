@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: `${import.meta.env.VITE_API_BASE_URL || 'https://sahi-spotv.vercel.app'}/api/v1`,
+  baseURL: `${(import.meta.env.VITE_API_BASE_URL || 'https://sahi-spotv.vercel.app').replace(/\/$/, '')}/api/v1`,
   withCredentials: true, // For cookie-based JWT authentication
 });
 

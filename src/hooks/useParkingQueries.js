@@ -1,4 +1,4 @@
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { keepPreviousData, useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
 import { bookingService } from "@/services/booking.service";
 import { locationService } from "@/services/location.service";
@@ -85,6 +85,16 @@ export const useNearbyLocations = (params) =>
     queryKey: ["nearbyLocations", params],
     queryFn: () => locationService.getNearbyLocations(params),
     staleTime: 30_000,
+    placeholderData: keepPreviousData,
+  });
+
+export const useSearchLocations = (params) =>
+  useQuery({
+    queryKey: ["searchLocations", params],
+    queryFn: () => locationService.searchLocations(params),
+    enabled: Boolean(params?.query?.trim()),
+    staleTime: 30_000,
+    placeholderData: keepPreviousData,
   });
 
 export const useParkingLocations = (lat = 28.6139, lng = 77.209, radius = 10) =>
