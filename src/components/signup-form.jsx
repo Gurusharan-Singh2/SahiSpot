@@ -39,8 +39,7 @@ export function SignupForm({
         <Button type="submit" className="w-full bg-Primary hover:bg-Secondary hover:text-lg transition-all duration-300 rounded-full hover:scale-110">
           Signup
         </Button>
-       
-       
+
       </div>
       <div className="text-center text-sm">
         Do you have an account?{" "}

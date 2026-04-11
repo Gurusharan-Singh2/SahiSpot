@@ -107,7 +107,7 @@ function ParkingDetailsModal({ location, onClose, onOpenDetails }) {
   );
 }
 
-export default function FindParking() {
+const FindParking = () => {
   const navigate = useNavigate();
   const {
     userLocation,
@@ -227,7 +227,7 @@ export default function FindParking() {
 
   return (
     <div className="min-h-screen bg-[radial-gradient(circle_at_top_left,_rgba(249,115,22,0.1),transparent_24%),linear-gradient(180deg,#08111f_0%,#09131d_45%,#030712_100%)]">
-      {/* Header Section */}
+      {}
       <div className="sticky top-[73px] z-40 border-b border-white/10 bg-black/20 backdrop-blur-sm md:top-[81px]">
         <div className="mx-auto max-w-7xl px-4 py-4 sm:px-6 lg:px-8">
           <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
@@ -294,7 +294,7 @@ export default function FindParking() {
           </div>
         </div>
 
-        {/* Stats Bar */}
+        {}
         <div className="mb-6 flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-white/10 bg-white/[0.04] px-5 py-3">
           <div className="flex flex-wrap items-center gap-4 text-sm">
             <span className="text-slate-300">
@@ -313,7 +313,7 @@ export default function FindParking() {
           )}
         </div>
 
-        {/* Map Section - TOP */}
+        {}
         <div className="mb-6">
           <div className="overflow-hidden rounded-2xl border border-white/10 bg-slate-950 shadow-2xl">
             <div className="border-b border-white/10 px-5 py-3">
@@ -353,7 +353,7 @@ export default function FindParking() {
               </Suspense>
             </div>
 
-            {/* Map Hint */}
+            {}
             <div className="border-t border-white/10 bg-black/30 px-5 py-2 text-center">
               <p className="text-xs text-slate-400">
                 Click any map marker to preview parking details instantly
@@ -362,7 +362,7 @@ export default function FindParking() {
           </div>
         </div>
 
-        {/* Locations List Section - BOTTOM */}
+        {}
         <div>
           <div className="mb-4 flex items-center justify-between">
             <h2 className="text-lg font-semibold text-white">Available Parking Locations</h2>
@@ -467,3 +467,5 @@ export default function FindParking() {
     </div>
   );
 }
+
+export default FindParking;

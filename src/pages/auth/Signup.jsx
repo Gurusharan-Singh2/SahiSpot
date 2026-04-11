@@ -8,7 +8,7 @@ import { authService } from "../../services/auth.service";
 import AuthShell from "@/components/auth/AuthShell";
 import { BadgeCheck, BriefcaseBusiness, Camera, Eye, EyeOff, KeyRound, Mail, Phone, User2, X } from "lucide-react";
 
-export default function Signup() {
+const Signup=()=> {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
@@ -220,3 +220,5 @@ export default function Signup() {
     </AuthShell>
   );
 }
+
+export default Signup

@@ -39,7 +39,7 @@ const createEditState = (location) => ({
   availableSlots: Number(location.availableSlots ?? 0),
 });
 
-export default function OwnerDashboard() {
+const OwnerDashboard = () => {
   const navigate = useNavigate();
   const updateLocation = useUpdateParkingLocation();
   const deleteLocation = useDeleteParkingLocation();
@@ -461,3 +461,5 @@ function EditField({ label, required = false, children }) {
     </label>
   );
 }
+
+export default OwnerDashboard;

@@ -72,7 +72,7 @@ const App = () => {
             <Route path="/locations/:id" element={<LocationDetails/>} />
             <Route path="/payment/:bookingId" element={<PaymentPage/>} />
             <Route path="/Find_Parking" element={<FindParking/>} />
-            {/* Protected routes placeholder */}
+            {}
             <Route element={<ProtectedRoute />}>
               <Route path="/dashboard" element={<UserDashboard />} />
             </Route>

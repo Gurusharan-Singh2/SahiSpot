@@ -190,7 +190,7 @@ function PricingCard({ slotType, isSelected, onSelect, Icon }) {
   );
 }
 
-export default function LocationDetails() {
+const LocationDetails = () => {
   const navigate = useNavigate();
   const { id } = useParams();
   const { user } = useAuth();
@@ -236,7 +236,6 @@ export default function LocationDetails() {
         ? Number(selectedSlotType?.pricePerDay || 0)
         : Number(selectedSlotType?.pricePerHour || 0) * Math.max(1, Number(totalHours || 1));
 
-  
   const finalPayable = Number((basePrice).toFixed(2));
   const VehicleIcon = vehicleIconMap[selectedVehicleType] || Car;
   const gallery =
@@ -369,7 +368,7 @@ export default function LocationDetails() {
 
   return (
     <div className="min-h-screen bg-[radial-gradient(circle_at_top_left,_rgba(249,115,22,0.08),transparent_40%),radial-gradient(circle_at_bottom_right,_rgba(16,185,129,0.08),transparent_40%),linear-gradient(180deg,#0a0f1a_0%,#0c111c_50%,#05080f_100%)]">
-      {/* Header with Navigation */}
+      {}
       <div className="sticky top-0 z-50 border-b border-white/10 bg-black/30 backdrop-blur-xl">
         <div className="mx-auto max-w-7xl px-4 py-3 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between">
@@ -396,7 +395,7 @@ export default function LocationDetails() {
       </div>
 
       <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
-        {/* Hero Section */}
+        {}
         <div className="mb-8 overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-br from-slate-900/80 to-slate-950/80 backdrop-blur">
           <div className="grid gap-0 lg:grid-cols-[1.4fr_0.6fr]">
             <div className="p-6 sm:p-8">
@@ -429,9 +428,9 @@ export default function LocationDetails() {
         </div>
 
         <div className="grid gap-6 lg:grid-cols-[1fr_380px]">
-          {/* Main Content */}
+          {}
           <div className="space-y-6">
-            {/* Map Section */}
+            {}
             <section className="overflow-hidden rounded-2xl border border-white/10 bg-slate-900/30 backdrop-blur">
               <div className="border-b border-white/10 px-5 py-4">
                 <h2 className="flex items-center gap-2 text-lg font-semibold text-white">
@@ -459,7 +458,7 @@ export default function LocationDetails() {
               </Suspense>
             </section>
 
-            {/* Image Gallery */}
+            {}
             <section className="overflow-hidden rounded-2xl border border-white/10 bg-slate-900/30 backdrop-blur">
               <div className="border-b border-white/10 px-5 py-4">
                 <h2 className="flex items-center gap-2 text-lg font-semibold text-white">
@@ -518,7 +517,7 @@ export default function LocationDetails() {
               </div>
             </section>
 
-            {/* Reviews Section */}
+            {}
             <section className="overflow-hidden rounded-2xl border border-white/10 bg-slate-900/30 backdrop-blur">
               <div className="border-b border-white/10 px-5 py-4">
                 <h2 className="flex items-center gap-2 text-lg font-semibold text-white">
@@ -543,7 +542,7 @@ export default function LocationDetails() {
             </section>
           </div>
 
-          {/* Booking Sidebar */}
+          {}
           {!isOwner && (
             <aside className="lg:sticky lg:top-24">
               <div className="overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-b from-slate-900/95 to-slate-950/95 backdrop-blur">
@@ -553,7 +552,7 @@ export default function LocationDetails() {
                 </div>
 
                 <div className="space-y-5 p-5">
-                  {/* Vehicle Type Selection */}
+                  {}
                   <div>
                     <label className="mb-3 block text-sm font-semibold text-white">Select Vehicle Type</label>
                     <div className="space-y-2">
@@ -577,7 +576,7 @@ export default function LocationDetails() {
                     </div>
                   </div>
 
-                  {/* Duration Selection */}
+                  {}
                   <div>
                     <label className="mb-3 block text-sm font-semibold text-white">Duration</label>
                     <div className="grid grid-cols-3 gap-2">
@@ -601,7 +600,7 @@ export default function LocationDetails() {
                     </div>
                   </div>
 
-                  {/* Date/Time Selection */}
+                  {}
                   <div>
                     <label className="mb-3 block text-sm font-semibold text-white">Start Time</label>
                     <input
@@ -631,12 +630,11 @@ export default function LocationDetails() {
                     </div>
                   )}
 
-                  {/* Price Breakdown */}
+                  {}
                   <div className="rounded-xl border border-white/10 bg-white/[0.04] p-4">
                     <h3 className="mb-3 text-sm font-semibold text-white">Price Breakdown</h3>
                     <div className="space-y-2 text-sm">
-                      
-                     
+
                       <div className="border-t border-white/10 pt-2">
                         <div className="flex justify-between font-semibold">
                           <span className="text-white">Total Payable</span>
@@ -682,3 +680,5 @@ export default function LocationDetails() {
     </div>
   );
 }
+
+export default LocationDetails;

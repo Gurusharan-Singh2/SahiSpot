@@ -84,14 +84,14 @@ function normalizeOrderPayload(rawOrder, bookingId, fallbackAmount) {
   };
 }
 
-export default function PaymentPage() {
+const PaymentPage = () => {
   const { bookingId } = useParams();
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
   const [status, setStatus] = useState("pending");
   const [loading, setLoading] = useState(false);
   const [confirmedAmountRs, setConfirmedAmountRs] = useState(null);
-  // Pre-fetched order stored so razorpay.open() can be called synchronously on click
+  
   const [preparedOrder, setPreparedOrder] = useState(null);
   const [preparing, setPreparing] = useState(false);
   const failureReportedRef = useRef(false);
@@ -100,8 +100,6 @@ export default function PaymentPage() {
   const amountFromQuery = useMemo(() => {
     return readNumber(searchParams.get("amount"));
   }, [searchParams]);
-
-  
 
   const verifyPaymentMutation = useMutation({
     mutationFn: paymentService.verifyPayment,
@@ -130,8 +128,6 @@ export default function PaymentPage() {
     }
   };
 
-  // Pre-load the SDK and pre-fetch the Razorpay order as soon as the page mounts,
-  // so the button click can open the modal immediately (avoids popup blocking).
   useEffect(() => {
     if (!bookingId) return;
     let cancelled = false;
@@ -163,7 +159,7 @@ export default function PaymentPage() {
     })();
 
     return () => { cancelled = true; };
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+  
   }, [bookingId]);
 
   const openRealCheckout = () => {
@@ -191,7 +187,6 @@ export default function PaymentPage() {
     paymentFailedRef.current = false;
     failureReportedRef.current = false;
 
-    // Called synchronously — no await before open() so browser won't block it
     const razorpay = new window.Razorpay({
       key: order.keyId,
       amount: order.amount,
@@ -345,3 +340,5 @@ export default function PaymentPage() {
     </div>
   );
 }
+
+export default PaymentPage;

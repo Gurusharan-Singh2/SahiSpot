@@ -8,7 +8,7 @@ import { authService } from "../services/auth.service";
 import { canManageParking, getDefaultRouteForRole, isAdminRole, normalizeRole } from "@/lib/auth";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
-export default function Navbar() {
+const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
   const { user, isAuthenticated, logout, updateUser } = useAuthStore();
@@ -272,3 +272,5 @@ export default function Navbar() {
     </motion.header>
   );
 }
+
+export default Navbar;

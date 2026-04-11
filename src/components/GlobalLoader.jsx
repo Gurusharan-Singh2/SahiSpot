@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useIsFetching, useIsMutating } from "@tanstack/react-query";
 import { Spinner } from "@/components/ui/spinner";
 
-export default function GlobalLoader() {
+const GlobalLoader = () => {
   const activeQueries = useIsFetching();
   const activeMutations = useIsMutating();
   const [visible, setVisible] = useState(false);
@@ -37,3 +37,5 @@ export default function GlobalLoader() {
     </div>
   );
 }
+
+export default GlobalLoader;

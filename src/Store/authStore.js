@@ -19,7 +19,7 @@ export const useAuthStore = create(
         })),
     }),
     {
-      name: 'auth-storage', // unique name
+      name: 'auth-storage', 
     }
   )
 );

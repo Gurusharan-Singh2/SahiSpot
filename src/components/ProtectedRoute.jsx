@@ -12,7 +12,7 @@ export const ProtectedRoute = ({ allowedRoles }) => {
   }
 
   if (allowedRoles && !allowedRoles.map(normalizeRole).includes(role)) {
-     return <Navigate to="/" replace />; // Or to a forbidden page
+     return <Navigate to="/" replace />; 
   }
 
   return <Outlet />;

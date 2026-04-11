@@ -5,7 +5,6 @@ import L from 'leaflet';
 import { MapPin } from 'lucide-react';
 import MarkerClusterGroup from 'react-leaflet-cluster';
 
-// Custom Marker Helpers (since React-Leaflet icons can be tricky)
 const createCustomIcon = (color = '#E62727') => {
     return L.divIcon({
         className: 'custom-pin',
@@ -17,8 +16,8 @@ const createCustomIcon = (color = '#E62727') => {
 };
 
 const defaultIcon = createCustomIcon('#E62727');
-const availableIcon = createCustomIcon('#16a34a'); // Green
-const fullIcon = createCustomIcon('#dc2626'); // Red
+const availableIcon = createCustomIcon('#16a34a'); 
+const fullIcon = createCustomIcon('#dc2626'); 
 const userIcon = L.divIcon({
     className: 'custom-user-icon',
     html: `<div style="background-color: #4f46e5; width: 16px; height: 16px; border-radius: 50%; border: 3px solid white; box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.2);"></div>`,

@@ -82,7 +82,6 @@ const stats = [
   { value: "4.9", label: "User Rating", icon: Star, trend: "⭐ 5k+ reviews" },
 ];
 
-// FAQ Accordion Component
 function FAQItem({ question, answer, isOpen, onToggle }) {
   return (
     <motion.div
@@ -120,7 +119,7 @@ function FAQItem({ question, answer, isOpen, onToggle }) {
   );
 }
 
-export default function ContactUsPage() {
+const ContactUsPage = () => {
   const [openFAQ, setOpenFAQ] = useState(null);
   const [formData, setFormData] = useState({
     name: "",
@@ -138,7 +137,7 @@ export default function ContactUsPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
-    // Simulate API call
+    
     await new Promise(resolve => setTimeout(resolve, 1500));
     setSubmitStatus("success");
     setIsSubmitting(false);
@@ -148,19 +147,19 @@ export default function ContactUsPage() {
 
   return (
     <div className="relative overflow-hidden bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950">
-      {/* Animated Background Elements */}
+      {}
       <div className="fixed inset-0 pointer-events-none">
         <div className="absolute top-0 left-1/4 w-96 h-96 bg-orange-500/20 rounded-full blur-3xl animate-pulse" />
         <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-emerald-500/20 rounded-full blur-3xl animate-pulse delay-1000" />
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-purple-500/10 rounded-full blur-3xl" />
         
-        {/* Grid Pattern */}
+        {}
         <div className="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg width=%2260%22 height=%2260%22 viewBox=%220 0 60 60%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cg fill=%22none%22 fill-rule=%22evenodd%22%3E%3Cg fill=%22%23ffffff%22 fill-opacity=%220.02%22%3E%3Cpath d=%22M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z%22/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')] opacity-20" />
       </div>
 
       <div className="relative mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
         
-        {/* Hero Section */}
+        {}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
@@ -189,7 +188,7 @@ export default function ContactUsPage() {
           </div>
         </motion.div>
 
-        {/* Stats Section */}
+        {}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -215,7 +214,7 @@ export default function ContactUsPage() {
           ))}
         </motion.div>
 
-        {/* Features Section */}
+        {}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -246,9 +245,9 @@ export default function ContactUsPage() {
           </div>
         </motion.div>
 
-        {/* Main Content Grid */}
+        {}
         <div className="grid gap-8 lg:grid-cols-[1fr_1.1fr] mb-16">
-          {/* Contact Cards */}
+          {}
           <div className="space-y-5">
             {contactCards.map(({ icon: Icon, title, value, note, gradient, iconGradient, action }, index) => (
               <motion.a
@@ -273,7 +272,7 @@ export default function ContactUsPage() {
                   </p>
                   <p className="mt-3 text-sm text-white/50 leading-relaxed">{note}</p>
                   
-                  {/* Action Button */}
+                  {}
                   <div className="mt-4 flex items-center gap-2 text-sm font-medium text-white/60 group-hover:text-white transition-colors duration-300">
                     Get in touch
                     <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
@@ -283,7 +282,7 @@ export default function ContactUsPage() {
             ))}
           </div>
 
-          {/* Contact Form */}
+          {}
           <motion.div
             initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -291,7 +290,7 @@ export default function ContactUsPage() {
             transition={{ delay: 0.2, type: "spring" }}
           >
             <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br from-white/5 to-white/0 backdrop-blur-sm p-6 md:p-8">
-              {/* Decorative Elements */}
+              {}
               <div className="absolute -top-20 -right-20 w-40 h-40 bg-gradient-to-r from-emerald-500/20 to-teal-500/20 rounded-full blur-3xl" />
               <div className="absolute -bottom-20 -left-20 w-40 h-40 bg-gradient-to-r from-blue-500/20 to-cyan-500/20 rounded-full blur-3xl" />
               
@@ -491,7 +490,7 @@ export default function ContactUsPage() {
           transition={{ delay: 0.5 }}
           className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-orange-500/10 to-amber-500/10 border border-white/10 p-8 text-center"
         >
-          <div className="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg width=%2260%22 height=%2260%22 viewBox=%220 0 60 60%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cg fill=%22none%22 fill-rule=%22evenodd%22%3E%3Cg fill=%22%23ffffff%22 fill-opacity=%220.03%22%3E%3Cpath d=%22M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z%22/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')] opacity-20" />
+          <div className="absolute inset-0 bg-[url('data:image/svg+xml;utf8,%3Csvg%20width=%2260%22%20height=%2260%22%20viewBox=%220%200%2060%2060%22%20xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cg%20fill=%22none%22%20fill-rule=%22evenodd%22%3E%3Cg%20fill=%22%23ffffff%22%20fill-opacity=%220.02%22%3E%3Cpath%20d=%22M36%2034v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6%2034v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6%204V0H4v4H0v2h4v4h2V6h4V4H6z%22/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')] opacity-20"></div>
           <div className="relative">
             <Headphones size={48} className="mx-auto mb-4 text-orange-400" />
             <h3 className="text-2xl font-bold text-white mb-2">Need Immediate Assistance?</h3>
@@ -507,7 +506,7 @@ export default function ContactUsPage() {
           </div>
         </motion.div>
 
-        {/* Social Links Section */}
+        {}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -541,7 +540,7 @@ export default function ContactUsPage() {
           </div>
         </motion.div>
 
-        {/* Trust Badge */}
+        {}
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
@@ -568,3 +567,5 @@ export default function ContactUsPage() {
     </div>
   );
 }
+
+export default ContactUsPage;

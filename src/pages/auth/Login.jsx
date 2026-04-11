@@ -10,7 +10,7 @@ import { getDefaultRouteForRole, mergeUserWithRoleFallback } from "@/lib/auth";
 import AuthShell from "@/components/auth/AuthShell";
 import { ArrowRight, Eye, EyeOff, KeyRound, Mail, ShieldCheck } from "lucide-react";
 
-export default function Login() {
+const Login=()=> {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
@@ -125,3 +125,5 @@ export default function Login() {
     </AuthShell>
   );
 }
+
+export default Login

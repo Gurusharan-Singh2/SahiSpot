@@ -137,7 +137,7 @@ const hasInvalidSlotType = (slotTypes = []) =>
     );
   });
 
-export default function ManageParking() {
+const ManageParking = () => {
   const { data: parkingSpots = [], isLoading } = useParkingLocations();
   const { data: ownerLocations = [] } = useMyParkingLocations();
   const { mutate: addLocation, isPending: isAdding } = useAddParkingLocation();
@@ -1125,3 +1125,5 @@ function Field({ label, required = false, children }) {
     </label>
   );
 }
+
+export default ManageParking;

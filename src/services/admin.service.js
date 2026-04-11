@@ -72,6 +72,7 @@ export const adminService = {
 
   getAllLocations: async () => {
     const response = await fetchFromFirstAvailableEndpoint([
+      () => api.get('/admin/parking/all', { params: { page: 1, limit: 100 } }),
       () => api.get('/admin/locations', { params: { page: 1, limit: 100 } }),
       () => api.get('/admin/parking/locations', { params: { page: 1, limit: 100 } }),
       () => api.get('/admin/parking-locations', { params: { page: 1, limit: 100 } }),
@@ -91,6 +92,22 @@ export const adminService = {
 
   rejectLocation: async (locationId) => {
     const response = await api.patch(`/admin/parking/${locationId}/reject`);
+    return extractPayload(response.data);
+  },
+
+  getAllBookings: async () => {
+    const response = await api.get('/admin/bookings', { params: { page: 1, limit: 100 } });
+    const data = extractPayload(response.data);
+    return Array.isArray(data?.bookings) ? data.bookings : data;
+  },
+
+  suspendUser: async (userId) => {
+    const response = await api.patch(`/admin/users/${userId}/suspend`);
+    return extractPayload(response.data);
+  },
+
+  suspendLocation: async (locationId) => {
+    const response = await api.patch(`/admin/parking/${locationId}/suspend`);
     return extractPayload(response.data);
   },
 };

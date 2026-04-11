@@ -39,7 +39,7 @@ const actions = [
   { icon: CreditCard, label: "Pay", description: "Complete payment in one flow" },
 ];
 
-export default function Hero() {
+const Hero = () => {
   const navigate = useNavigate();
 
   return (
@@ -226,3 +226,5 @@ export default function Hero() {
     </section>
   );
 }
+
+export default Hero;

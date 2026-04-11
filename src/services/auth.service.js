@@ -1,4 +1,4 @@
-// auth.service.js
+
 import api from './api';
 
 const buildAuthPayload = (data) => {
@@ -24,13 +24,12 @@ const buildAuthPayload = (data) => {
 };
 
 export const authService = {
-  // Request OTP for signup
+  
   signup: async (data) => {
     const response = await api.post('/signup', data);
     return response.data;
   },
 
-  // Verify OTP for signup
   verifyOtp: async (data) => {
     const payload = buildAuthPayload(data);
     const response = await api.post('/verify-otp', payload, {
@@ -39,7 +38,6 @@ export const authService = {
     return response.data;
   },
 
-  // Standard Login
   login: async (data) => {
     const response = await api.post('/login', data);
     return response.data;
@@ -50,25 +48,21 @@ export const authService = {
     return response.data;
   },
 
-  // Logout clears cookies on backend
   logout: async () => {
     const response = await api.post('/logout');
     return response.data;
   },
 
-  // Forgot password request
   forgotPassword: async (data) => {
     const response = await api.post('/forgot-password', data);
     return response.data;
   },
 
-  // Reset password via OTP
   resetPassword: async (data) => {
     const response = await api.post('/forgot-password/reset', data);
     return response.data;
   },
-  
-  // Get current user profile
+
   getProfile: async () => {
     const response = await api.get('/profile');
     return response.data;

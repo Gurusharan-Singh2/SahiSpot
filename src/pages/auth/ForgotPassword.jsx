@@ -8,7 +8,7 @@ import { authService } from "../../services/auth.service";
 import AuthShell from "@/components/auth/AuthShell";
 import { KeyRound, Mail, RefreshCcw, ShieldEllipsis } from "lucide-react";
 
-export default function ForgotPassword() {
+const ForgotPassword=()=> {
   const navigate = useNavigate();
   const [step, setStep] = useState(1);
   const [loading, setLoading] = useState(false);
@@ -137,3 +137,4 @@ export default function ForgotPassword() {
     </AuthShell>
   );
 }
+export default ForgotPassword

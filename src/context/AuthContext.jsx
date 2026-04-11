@@ -11,7 +11,7 @@ export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Check if token exists and optionally validate it
+    
     const storedToken = localStorage.getItem("token");
     const storedUser = localStorage.getItem("user");
     if (storedToken && storedUser) {
@@ -76,7 +76,6 @@ export const AuthProvider = ({ children }) => {
         const data = await response.json();
         if (!response.ok) throw new Error(data.message || "Signup failed");
 
-        // Assuming backend now returns token on signup verify
         if (data.token) {
             setToken(data.token);
             setUser(data.user);
@@ -84,7 +83,7 @@ export const AuthProvider = ({ children }) => {
             localStorage.setItem("user", JSON.stringify(data.user));
             toast.success("Signup successful!");
         } else {
-             // Fallback if backend doesn't return token immediately
+             
              toast.success("Signup successful! Please login.");
         }
         return data;
@@ -93,7 +92,6 @@ export const AuthProvider = ({ children }) => {
         throw error;
     }
   };
-
 
   const logout = () => {
     setUser(null);

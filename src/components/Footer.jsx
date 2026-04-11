@@ -15,7 +15,7 @@ const footerLinks = {
   ],
 };
 
-export default function Footer() {
+const Footer = () => {
   return (
     <footer className="border-t border-white/10 bg-[#050a14] pb-8 pt-12 sm:pt-16">
       <div className="mx-auto max-w-[90rem] px-3 sm:px-5 lg:px-6 xl:px-8">
@@ -118,3 +118,5 @@ export default function Footer() {
     </footer>
   );
 }
+
+export default Footer;

@@ -57,7 +57,7 @@ const testimonials = [
   },
 ];
 
-export default function Working() {
+const Working = () => {
   return (
     <section className="px-3 pb-18 pt-8 sm:px-5 lg:px-6 xl:px-8">
       <div className="mx-auto max-w-[90rem] space-y-8">
@@ -176,3 +176,5 @@ export default function Working() {
     </section>
   );
 }
+
+export default Working;

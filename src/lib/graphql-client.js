@@ -4,7 +4,7 @@ const endpoint = 'http://localhost:8000/graphql';
 
 export const graphQLClient = new GraphQLClient(endpoint, {
     headers: () => {
-        const token = localStorage.getItem('token'); // Use localStorage for simplicity or hook into auth context
+        const token = localStorage.getItem('token'); 
         return {
             authorization: token ? `Bearer ${token}` : '',
         };

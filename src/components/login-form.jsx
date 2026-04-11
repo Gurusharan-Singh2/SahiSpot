@@ -34,8 +34,7 @@ export function LoginForm({
         <Button type="submit" className="w-full bg-Primary hover:bg-Secondary hover:text-lg transition-all duration-300 rounded-full hover:scale-110">
           Login
         </Button>
-      
-      
+
       </div>
       <div className="text-center text-sm">
         Don&apos;t have an account?{" "}

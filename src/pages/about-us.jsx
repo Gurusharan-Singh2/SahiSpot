@@ -1,80 +1,28 @@
+import { achievements, metrics, milestones, teamMembers, values } from "@/lib/extra";
 import { motion } from "framer-motion";
 import { 
   Building2, HeartHandshake, MapPinned, Radar, ShieldCheck, Users,
   Sparkles, ArrowRight, CheckCircle2, Globe, Trophy, Clock,
-  Star, Quote, Award, Target, Eye, Zap, Coffee, Laptop, Code
+  Star, Quote, Award, Target, Eye, Zap, Coffee, Laptop, Code,
+  Rocket, TrendingUp
 } from "lucide-react";
 import { useState } from "react";
 
-const values = [
-  {
-    icon: Radar,
-    title: "Map-first clarity",
-    description: "We reduce parking chaos with live spatial context, not guesswork.",
-    gradient: "from-blue-500/20 to-cyan-500/20",
-    iconGradient: "from-blue-500 to-cyan-500"
-  },
-  {
-    icon: ShieldCheck,
-    title: "Trust in every booking",
-    description: "Drivers and owners should feel safe, informed, and in control.",
-    gradient: "from-emerald-500/20 to-teal-500/20",
-    iconGradient: "from-emerald-500 to-teal-500"
-  },
-  {
-    icon: HeartHandshake,
-    title: "Less friction, more flow",
-    description: "Every step should remove stress instead of adding another form or dead end.",
-    gradient: "from-purple-500/20 to-pink-500/20",
-    iconGradient: "from-purple-500 to-pink-500"
-  },
-];
-
-const metrics = [
-  { label: "Drivers served", value: "90k+", icon: Users, trend: "+25% this month" },
-  { label: "Parking partners", value: "1,200+", icon: Building2, trend: "+150 new" },
-  { label: "Cities activated", value: "18", icon: Globe, trend: "4 more coming" },
-];
-
-const milestones = [
-  { year: "2021", title: "The Beginning", description: "SahiSpot founded with a vision to transform urban parking", icon: Coffee },
-  { year: "2022", title: "First Launch", description: "Launched in 5 cities with 200+ parking partners", icon: Rocket },
-  { year: "2023", title: "Rapid Growth", description: "Expanded to 15 cities, served 50K+ happy drivers", icon: TrendingUp },
-  { year: "2024", title: "Industry Leader", description: "Recognized as India's fastest-growing parking platform", icon: Trophy },
-];
-
-const teamMembers = [
-  { name: "Rajesh Kumar", role: "CEO & Founder", bio: "Ex-Google, passionate about urban mobility", image: "https://ui-avatars.com/api/?name=Rajesh+Kumar&background=fb923c&color=fff&bold=true" },
-  { name: "Priya Sharma", role: "CTO", bio: "Full-stack architect, ex-Amazon", image: "https://ui-avatars.com/api/?name=Priya+Sharma&background=fb923c&color=fff&bold=true" },
-  { name: "Amit Verma", role: "Head of Product", bio: "Product leader with 10+ years in tech", image: "https://ui-avatars.com/api/?name=Amit+Verma&background=fb923c&color=fff&bold=true" },
-  { name: "Neha Gupta", role: "Customer Success", bio: "Making every driver's experience delightful", image: "https://ui-avatars.com/api/?name=Neha+Gupta&background=fb923c&color=fff&bold=true" },
-];
-
-const achievements = [
-  { icon: Trophy, label: "Best Tech Startup", year: "2023", color: "from-yellow-500 to-amber-500" },
-  { icon: Star, label: "4.9 Rating", year: "2024", color: "from-emerald-500 to-teal-500" },
-  { icon: Zap, label: "Fastest Growth", year: "2024", color: "from-blue-500 to-cyan-500" },
-  { icon: Users, label: "50K+ Users", year: "2024", color: "from-purple-500 to-pink-500" },
-];
-
-export default function AboutUsPage() {
+const AboutUsPage=()=> {
   const [activeMilestone, setActiveMilestone] = useState(null);
 
   return (
     <div className="relative overflow-hidden bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950">
-      {/* Animated Background Elements */}
       <div className="fixed inset-0 pointer-events-none">
         <div className="absolute top-0 left-1/4 w-96 h-96 bg-orange-500/20 rounded-full blur-3xl animate-pulse" />
         <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-emerald-500/20 rounded-full blur-3xl animate-pulse delay-1000" />
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-purple-500/10 rounded-full blur-3xl" />
         
-        {/* Grid Pattern */}
         <div className="absolute inset-0 bg-[url('data:image/svg+xml;utf8,%3Csvg%20width=%2260%22%20height=%2260%22%20viewBox=%220%200%2060%2060%22%20xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cg%20fill=%22none%22%20fill-rule=%22evenodd%22%3E%3Cg%20fill=%22%23ffffff%22%20fill-opacity=%220.02%22%3E%3Cpath%20d=%22M36%2034v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6%2034v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6%204V0H4v4H0v2h4v4h2V6h4V4H6z%22/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')] opacity-20" />
       </div>
 
       <div className="relative mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
         
-        {/* Hero Section */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
@@ -103,7 +51,6 @@ export default function AboutUsPage() {
           </div>
         </motion.div>
 
-        {/* Metrics Grid */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -131,9 +78,7 @@ export default function AboutUsPage() {
           ))}
         </motion.div>
 
-        {/* Main Content Grid */}
         <div className="grid gap-8 lg:grid-cols-[1fr_1.1fr] mb-16">
-          {/* What We Believe Section */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -167,7 +112,6 @@ export default function AboutUsPage() {
             </div>
           </motion.div>
 
-          {/* Values Grid */}
           <div className="space-y-5">
             {values.map(({ icon: Icon, title, description, gradient, iconGradient }, index) => (
               <motion.div
@@ -192,7 +136,6 @@ export default function AboutUsPage() {
           </div>
         </div>
 
-        {/* Who We Design For Section */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -250,7 +193,6 @@ export default function AboutUsPage() {
           </div>
         </motion.div>
 
-        {/* Milestones Timeline */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -263,7 +205,7 @@ export default function AboutUsPage() {
             <p className="text-white/50">From idea to industry leader — our milestones</p>
           </div>
           <div className="relative">
-            {/* Timeline line */}
+        
             <div className="absolute left-1/2 transform -translate-x-1/2 h-full w-px bg-gradient-to-b from-orange-500/50 via-white/20 to-transparent hidden md:block" />
             
             <div className="space-y-8">
@@ -298,7 +240,6 @@ export default function AboutUsPage() {
           </div>
         </motion.div>
 
-        {/* Achievements Section */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -331,7 +272,6 @@ export default function AboutUsPage() {
           </div>
         </motion.div>
 
-        {/* Team Section */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -370,7 +310,6 @@ export default function AboutUsPage() {
           </div>
         </motion.div>
 
-        {/* CTA Banner */}
         <motion.div
           initial={{ opacity: 0, scale: 0.95 }}
           whileInView={{ opacity: 1, scale: 1 }}
@@ -378,7 +317,7 @@ export default function AboutUsPage() {
           transition={{ delay: 0.6 }}
           className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-orange-500/10 to-amber-500/10 border border-white/10 p-8 text-center"
         >
-          <div className="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg width=%2260%22 height=%2260%22 viewBox=%220 0 60 60%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cg fill=%22none%22 fill-rule=%22evenodd%22%3E%3Cg fill=%22%23ffffff%22 fill-opacity=%220.03%22%3E%3Cpath d=%22M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z%22/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')] opacity-20" />
+          <div className="absolute inset-0 bg-[url('data:image/svg+xml;utf8,%3Csvg%20width=%2260%22%20height=%2260%22%20viewBox=%220%200%2060%2060%22%20xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cg%20fill=%22none%22%20fill-rule=%22evenodd%22%3E%3Cg%20fill=%22%23ffffff%22%20fill-opacity=%220.02%22%3E%3Cpath%20d=%22M36%2034v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6%2034v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6%204V0H4v4H0v2h4v4h2V6h4V4H6z%22/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')] opacity-20"></div>
           <div className="relative">
             <Sparkles size={48} className="mx-auto mb-4 text-orange-400" />
             <h3 className="text-2xl font-bold text-white mb-2">Join Us on This Journey</h3>
@@ -406,7 +345,6 @@ export default function AboutUsPage() {
           </div>
         </motion.div>
 
-        {/* Trust Badge */}
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
@@ -423,3 +361,5 @@ export default function AboutUsPage() {
     </div>
   );
 }
+
+export default AboutUsPage;

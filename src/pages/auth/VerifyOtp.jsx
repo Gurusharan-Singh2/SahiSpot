@@ -9,8 +9,7 @@ import { useAuthStore } from "../../Store/authStore";
 import { getDefaultRouteForRole, mergeUserWithRoleFallback } from "@/lib/auth";
 import AuthShell from "@/components/auth/AuthShell";
 import { BadgeCheck, Camera, ShieldCheck } from "lucide-react";
-
-export default function VerifyOtp() {
+const VerifyOtp=()=> {
   const navigate = useNavigate();
   const location = useLocation();
   const [otp, setOtp] = useState("");
@@ -119,3 +118,5 @@ export default function VerifyOtp() {
     </AuthShell>
   );
 }
+
+export default VerifyOtp
