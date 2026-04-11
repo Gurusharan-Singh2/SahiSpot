@@ -5,6 +5,7 @@ import {
   Crosshair,
   LoaderCircle,
   MapPin,
+  SlidersHorizontal,
   Search,
   X,
 } from "lucide-react";
@@ -12,6 +13,7 @@ import { useNavigate } from "react-router-dom";
 import { useNearbyLocations, useSearchLocations } from "@/hooks/useParkingQueries";
 import { getFallbackCenter } from "@/lib/parking";
 import { useLocationStore } from "@/Store/locationStore";
+import { Slider } from "@/components/ui/slider";
 
 const LazyMapView = lazy(() => import("@/components/map/MapView"));
 
@@ -226,7 +228,7 @@ export default function FindParking() {
   return (
     <div className="min-h-screen bg-[radial-gradient(circle_at_top_left,_rgba(249,115,22,0.1),transparent_24%),linear-gradient(180deg,#08111f_0%,#09131d_45%,#030712_100%)]">
       {/* Header Section */}
-      <div className="border-b border-white/10 bg-black/20 backdrop-blur-sm sticky top-0 z-50">
+      <div className="sticky top-[73px] z-40 border-b border-white/10 bg-black/20 backdrop-blur-sm md:top-[81px]">
         <div className="mx-auto max-w-7xl px-4 py-4 sm:px-6 lg:px-8">
           <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
             <div>
@@ -260,6 +262,38 @@ export default function FindParking() {
       </div>
 
       <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
+        <div className="mb-6 rounded-2xl border border-white/10 bg-white/[0.04] p-4 shadow-xl backdrop-blur-sm">
+          <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
+            <div className="flex items-start gap-3">
+              <div className="mt-0.5 flex h-10 w-10 items-center justify-center rounded-2xl border border-white/10 bg-white/[0.05] text-emerald-300">
+                <SlidersHorizontal className="h-4 w-4" />
+              </div>
+              <div>
+                <p className="text-sm font-semibold text-white">Search radius</p>
+                <p className="text-sm text-slate-400">
+                  Show parking spots within <span className="font-semibold text-white">{filters.radius} km</span>
+                </p>
+              </div>
+            </div>
+
+            <div className="w-full lg:max-w-md">
+              <div className="mb-3 flex items-center justify-between text-xs uppercase tracking-[0.18em] text-slate-500">
+                <span>1 km</span>
+                <span>{filters.radius} km</span>
+                <span>25 km</span>
+              </div>
+              <Slider
+                value={[Number(filters.radius)]}
+                min={1}
+                max={25}
+                step={1}
+                onValueChange={([value]) => setFilters({ radius: value })}
+                className="[&_[data-slot=slider-track]]:bg-white/10 [&_[data-slot=slider-range]]:bg-gradient-to-r [&_[data-slot=slider-range]]:from-emerald-400 [&_[data-slot=slider-range]]:to-orange-400 [&_[data-slot=slider-thumb]]:border-2 [&_[data-slot=slider-thumb]]:border-emerald-300 [&_[data-slot=slider-thumb]]:bg-slate-950"
+              />
+            </div>
+          </div>
+        </div>
+
         {/* Stats Bar */}
         <div className="mb-6 flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-white/10 bg-white/[0.04] px-5 py-3">
           <div className="flex flex-wrap items-center gap-4 text-sm">

@@ -64,7 +64,7 @@ export default function Navbar() {
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ type: "spring", stiffness: 100, damping: 20 }}
-      className="sticky top-0 z-50 border-b border-white/10 bg-[#07111bcc]/90 backdrop-blur-xl"
+      className="sticky top-0 z-[1100] border-b border-white/10 bg-[#07111bcc]/90 backdrop-blur-xl"
     >
       <div className="mx-auto flex max-w-[90rem] items-center justify-between gap-4 px-3 py-3 sm:px-5 sm:py-4 lg:px-6 xl:px-8">
         <Link to="/" className="shrink-0">
@@ -180,7 +180,7 @@ export default function Navbar() {
         <motion.button
           whileTap={{ scale: 0.9 }}
           onClick={() => setIsOpen(!isOpen)}
-          className="rounded p-2 text-slate-200 focus:outline-none md:hidden"
+          className="relative z-[1110] ml-auto shrink-0 rounded p-2 text-slate-200 focus:outline-none md:hidden"
         >
           {isOpen ? <X size={28} /> : <Menu size={28} />}
         </motion.button>
@@ -192,7 +192,7 @@ export default function Navbar() {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            className="absolute left-0 top-full flex w-full flex-col items-center space-y-4 overflow-hidden border-t border-white/10 bg-[#07111bf2] px-4 py-6 shadow-xl md:hidden"
+            className="absolute left-0 top-full z-[1105] flex w-full flex-col items-center space-y-4 overflow-hidden border-t border-white/10 bg-[#07111bf2] px-4 py-6 shadow-xl md:hidden"
           >
             {navItems.map((item, index) => (
               <motion.div

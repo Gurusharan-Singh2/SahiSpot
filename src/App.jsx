@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
+import { BrowserRouter, Navigate, Route, Routes, useLocation } from 'react-router-dom'
 import HomePage from './pages/home'
 import Footer from './components/Footer'
 import Navbar from './components/Navbar'
@@ -20,6 +20,16 @@ import AdminDashboard from './pages/AdminDashboard'
 import { Toaster } from 'sonner'
 import Lenis from 'lenis'
 import GlobalLoader from './components/GlobalLoader'
+
+function ScrollToTop() {
+  const { pathname } = useLocation()
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })
+  }, [pathname])
+
+  return null
+}
 
 const App = () => {
   useEffect(() => {
@@ -44,6 +54,7 @@ const App = () => {
   return (
     <div className='min-h-screen pb-2'>
       <BrowserRouter>
+        <ScrollToTop />
         <GlobalLoader />
         <Navbar />
         <Toaster position="top-center" richColors />

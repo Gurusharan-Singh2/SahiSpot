@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import { useMutation } from "@tanstack/react-query";
 import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 import { toast } from "sonner";
@@ -94,6 +94,8 @@ export default function PaymentPage() {
   // Pre-fetched order stored so razorpay.open() can be called synchronously on click
   const [preparedOrder, setPreparedOrder] = useState(null);
   const [preparing, setPreparing] = useState(false);
+  const failureReportedRef = useRef(false);
+  const paymentFailedRef = useRef(false);
 
   const amountFromQuery = useMemo(() => {
     return readNumber(searchParams.get("amount"));
@@ -105,9 +107,28 @@ export default function PaymentPage() {
     mutationFn: paymentService.verifyPayment,
   });
 
+  const failPaymentMutation = useMutation({
+    mutationFn: paymentService.failPayment,
+  });
+
   const checkoutMutation = useMutation({
     mutationFn: bookingService.checkoutBooking,
   });
+
+  const reportFailedPayment = async () => {
+    if (!bookingId || failureReportedRef.current) {
+      return;
+    }
+
+    failureReportedRef.current = true;
+
+    try {
+      await failPaymentMutation.mutateAsync(Number(bookingId));
+    } catch (error) {
+      failureReportedRef.current = false;
+      console.error("Failed to report payment failure", error);
+    }
+  };
 
   // Pre-load the SDK and pre-fetch the Razorpay order as soon as the page mounts,
   // so the button click can open the modal immediately (avoids popup blocking).
@@ -167,6 +188,8 @@ export default function PaymentPage() {
     }
 
     setLoading(true);
+    paymentFailedRef.current = false;
+    failureReportedRef.current = false;
 
     // Called synchronously — no await before open() so browser won't block it
     const razorpay = new window.Razorpay({
@@ -207,7 +230,10 @@ export default function PaymentPage() {
         }
       },
       modal: {
-        ondismiss: () => {
+        ondismiss: async () => {
+          if (paymentFailedRef.current) {
+            await reportFailedPayment();
+          }
           setLoading(false);
           toast.message("Payment window closed.");
         },
@@ -226,8 +252,10 @@ export default function PaymentPage() {
       },
     });
 
-    razorpay.on("payment.failed", (response) => {
+    razorpay.on("payment.failed", async (response) => {
       console.error("Razorpay payment failed", response?.error);
+      paymentFailedRef.current = true;
+      await reportFailedPayment();
       setStatus("failed");
       setLoading(false);
       toast.error(response?.error?.description || "Payment failed. Please try again.");

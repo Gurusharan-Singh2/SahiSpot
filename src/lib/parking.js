@@ -24,6 +24,53 @@ const getFirstString = (...values) => {
   return "";
 };
 
+export const parseDateTimeValue = (value) => {
+  if (!value) {
+    return null;
+  }
+
+  if (value instanceof Date) {
+    return Number.isNaN(value.getTime()) ? null : value;
+  }
+
+  if (typeof value === "number") {
+    const date = new Date(value);
+    return Number.isNaN(date.getTime()) ? null : date;
+  }
+
+  if (typeof value !== "string") {
+    return null;
+  }
+
+  const trimmed = value.trim();
+  const localDateTimeMatch = trimmed.match(
+    /^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2})(?::(\d{2}))?(?:\.(\d{1,3}))?$/
+  );
+
+  if (localDateTimeMatch) {
+    const [, year, month, day, hour, minute, second = "0", millisecond = "0"] = localDateTimeMatch;
+    const date = new Date(
+      Number(year),
+      Number(month) - 1,
+      Number(day),
+      Number(hour),
+      Number(minute),
+      Number(second),
+      Number(millisecond.padEnd(3, "0"))
+    );
+
+    return Number.isNaN(date.getTime()) ? null : date;
+  }
+
+  const parsed = new Date(trimmed);
+  return Number.isNaN(parsed.getTime()) ? null : parsed;
+};
+
+export const formatDateTimeForApi = (value) => {
+  const date = parseDateTimeValue(value);
+  return date ? date.toISOString() : "";
+};
+
 export const extractPayload = (response) => {
   if (Array.isArray(response)) {
     return response;

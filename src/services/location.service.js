@@ -1,12 +1,28 @@
 import api from './api';
 import {
   extractPayload,
+  normalizeReview,
   normalizeImages,
   normalizeLocation,
   normalizeLocations,
   normalizeReviews,
   normalizeSlots,
 } from '@/lib/parking';
+import { getLocalReviews, saveLocalReview } from '@/lib/userPreferences';
+
+const mergeReviews = (remoteReviews = [], localReviews = []) => {
+  const seen = new Set();
+
+  return [...localReviews, ...remoteReviews].filter((review) => {
+    const key = String(review?.id ?? "");
+    if (!key || seen.has(key)) {
+      return false;
+    }
+
+    seen.add(key);
+    return true;
+  });
+};
 
 export const locationService = {
   getAllLocations: async ({ city, page = 1, limit = 50 } = {}) => {
@@ -91,14 +107,65 @@ export const locationService = {
   },
 
   getLocationReviews: async (locationId, { page = 1, limit = 10 } = {}) => {
-    const response = await api.get(`/parking/locations/${locationId}/reviews`, {
-      params: { page, limit },
-    });
-    return normalizeReviews(response.data);
+    const localReviews = getLocalReviews(locationId);
+
+    try {
+      const response = await api.get(`/parking/locations/${locationId}/reviews`, {
+        params: { page, limit },
+      });
+      return mergeReviews(normalizeReviews(response.data), localReviews);
+    } catch (error) {
+      if (error?.response?.status === 404) {
+        return localReviews;
+      }
+
+      throw error;
+    }
   },
 
   getLocationImages: async (locationId) => {
     const response = await api.get(`/parking/locations/${locationId}/images`);
     return normalizeImages(response.data);
+  },
+
+  createLocationReview: async ({ locationId, bookingId, rating, comment, userName }) => {
+    const payload = {
+      rating: Number(rating),
+      comment: String(comment || "").trim(),
+      booking_id: bookingId ? Number(bookingId) : undefined,
+    };
+
+    const candidates = [
+      () => api.post(`/parking/locations/${locationId}/reviews`, payload),
+      () => api.post(`/parking/reviews`, { ...payload, location_id: Number(locationId) }),
+      () => api.post(`/parking/locations/${locationId}/comments`, payload),
+    ];
+
+    for (const request of candidates) {
+      try {
+        const response = await request();
+        return normalizeReview(
+          extractPayload(response.data) || {
+            ...payload,
+            user_name: userName,
+          }
+        );
+      } catch (error) {
+        const statusCode = error?.response?.status;
+        if (statusCode && statusCode !== 404 && statusCode !== 405) {
+          throw error;
+        }
+      }
+    }
+
+    const [savedReview] = saveLocalReview({
+      locationId,
+      bookingId,
+      rating,
+      comment,
+      userName,
+    });
+
+    return normalizeReview(savedReview);
   },
 };

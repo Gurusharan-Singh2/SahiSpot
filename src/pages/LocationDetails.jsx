@@ -27,6 +27,8 @@ import { toast } from "sonner";
 import { useAuth } from "@/context/AuthContext";
 import { useCreateBooking, useLocationDetails } from "@/hooks/useParkingQueries";
 import { canManageParking } from "@/lib/auth";
+import { formatDateTimeForApi } from "@/lib/parking";
+import { isFavoriteLocation, toggleFavoriteLocation } from "@/lib/userPreferences";
 
 const LazyMapView = lazy(() => import("@/components/map/MapView"));
 
@@ -256,6 +258,23 @@ export default function LocationDetails() {
     });
   }, [gallery.length]);
 
+  useEffect(() => {
+    if (!location?.id) return;
+    setIsLiked(isFavoriteLocation(location.id));
+  }, [location?.id]);
+
+  const handleToggleFavorite = () => {
+    if (!location?.id) {
+      return;
+    }
+
+    const result = toggleFavoriteLocation(location);
+    setIsLiked(result.isFavorite);
+    toast.success(
+      result.isFavorite ? "Added to favorites." : "Removed from favorites."
+    );
+  };
+
   const handleBooking = async () => {
     setFormError("");
 
@@ -300,8 +319,8 @@ export default function LocationDetails() {
       vehicle_type: selectedVehicleType,
       duration_type: durationType,
       total_hours: durationType === "hour" ? Number(totalHours) : undefined,
-      start_time: startTime,
-      end_time: endTime,
+      start_time: formatDateTimeForApi(startTime),
+      end_time: formatDateTimeForApi(endTime),
     });
 
     const bookingId = booking?.id || booking?.booking_id || location.id;
@@ -363,7 +382,7 @@ export default function LocationDetails() {
             </button>
             <div className="flex gap-2">
               <button
-                onClick={() => setIsLiked(!isLiked)}
+                onClick={handleToggleFavorite}
                 className="rounded-full border border-white/10 bg-white/[0.04] p-2 text-slate-300 transition hover:bg-white/[0.08]"
               >
                 <Heart className={`h-5 w-5 ${isLiked ? "fill-red-500 text-red-500" : ""}`} />
