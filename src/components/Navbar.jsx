@@ -5,11 +5,13 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useQuery } from "@tanstack/react-query";
 import { useAuthStore } from "../Store/authStore";
 import { authService } from "../services/auth.service";
-import { canManageParking, getDefaultRouteForRole, isAdminRole, normalizeRole } from "@/lib/auth";
+import { canManageParking, isAdminRole, normalizeRole } from "@/lib/auth";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import EditProfileModal from "@/components/dashboard/EditProfileModal";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [isEditProfileOpen, setIsEditProfileOpen] = useState(false);
   const navigate = useNavigate();
   const { user, isAuthenticated, logout, updateUser } = useAuthStore();
   const role = normalizeRole(user?.role);
@@ -57,9 +59,9 @@ const Navbar = () => {
       isActive ? "text-orange-300" : "text-slate-300 hover:text-white"
     }`;
 
-  const profileRoute = getDefaultRouteForRole(role);
-
   return (
+    <>
+    <EditProfileModal isOpen={isEditProfileOpen} onClose={() => setIsEditProfileOpen(false)} />
     <motion.header
       initial={{ y: -100 }}
       animate={{ y: 0 }}
@@ -158,7 +160,7 @@ const Navbar = () => {
 
                 <button
                   type="button"
-                  onClick={() => navigate(profileRoute)}
+                  onClick={() => setIsEditProfileOpen(true)}
                   className="mt-2 flex w-full items-center gap-2 rounded-xl px-3 py-2 text-sm font-medium text-slate-200 transition hover:bg-white/[0.06]"
                 >
                   <Settings className="h-4 w-4 text-slate-400" />
@@ -250,7 +252,7 @@ const Navbar = () => {
                 <button
                   type="button"
                   onClick={() => {
-                    navigate(profileRoute);
+                    setIsEditProfileOpen(true);
                     setIsOpen(false);
                   }}
                   className="w-full rounded-full border border-white/10 bg-white/[0.03] px-6 py-3 text-center text-sm font-medium text-slate-300 hover:text-white"
@@ -270,6 +272,7 @@ const Navbar = () => {
         ) : null}
       </AnimatePresence>
     </motion.header>
+    </>
   );
 }
 

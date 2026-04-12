@@ -63,6 +63,16 @@ export const authService = {
     return response.data;
   },
 
+  editProfile: async (data) => {
+    const formData = new FormData();
+    if (data.name) formData.append("name", data.name);
+    if (data.photo) formData.append("img", data.photo);
+    const response = await api.put('/profile/edit', formData, {
+      headers: { 'Content-Type': 'multipart/form-data' },
+    });
+    return response.data;
+  },
+
   getProfile: async () => {
     const response = await api.get('/profile');
     return response.data;
