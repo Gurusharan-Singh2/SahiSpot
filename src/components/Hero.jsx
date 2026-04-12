@@ -15,6 +15,7 @@ import {
   Zap,
 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import { useAuthStore } from "../Store/authStore";
 
 const quickStats = [
   { label: "Cities onboarded", value: "24+" },
@@ -49,6 +50,7 @@ const LiveBookings = [
 
 const Hero = () => {
   const navigate = useNavigate();
+  const { isAuthenticated } = useAuthStore();
   const [activeNotification, setActiveNotification] = useState(0);
 
   // 3D Tilt effect values
@@ -157,13 +159,15 @@ const Hero = () => {
               Find parking now
               <ArrowRight className="h-4 w-4" />
             </button>
-            <button
-              type="button"
-              onClick={() => navigate("/auth/signup")}
-              className="inline-flex w-full items-center justify-center gap-2 rounded-full border border-white/12 bg-white/[0.04] px-6 py-4 text-sm font-semibold text-slate-200 transition hover:bg-white/[0.08] sm:w-auto sm:px-7"
-            >
-              Create free account
-            </button>
+            {!isAuthenticated && (
+              <button
+                type="button"
+                onClick={() => navigate("/auth/signup")}
+                className="inline-flex w-full items-center justify-center gap-2 rounded-full border border-white/12 bg-white/[0.04] px-6 py-4 text-sm font-semibold text-slate-200 transition hover:bg-white/[0.08] sm:w-auto sm:px-7"
+              >
+                Create free account
+              </button>
+            )}
           </div>
 
           <div className="flex flex-wrap gap-3">
