@@ -11,6 +11,7 @@ import EditProfileModal from "@/components/dashboard/EditProfileModal";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isEditProfileOpen, setIsEditProfileOpen] = useState(false);
   const navigate = useNavigate();
   const { user, isAuthenticated, logout, updateUser } = useAuthStore();
@@ -28,6 +29,16 @@ const Navbar = () => {
       updateUser(profileQuery.data?.data ?? profileQuery.data?.user ?? profileQuery.data);
     }
   }, [profileQuery.data, updateUser]);
+
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (!e.target.closest("#user-menu-wrapper")) {
+        setIsDropdownOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
 
   const userInitial = String(user?.name || user?.email || "U").charAt(0).toUpperCase();
 
@@ -132,10 +143,11 @@ const Navbar = () => {
               </NavLink>
             </div>
           ) : (
-            <div className="group relative flex items-center">
+            <div id="user-menu-wrapper" className="relative flex items-center">
               <button
                 type="button"
-                className="flex items-center gap-3 rounded-full border border-white/10 bg-white/[0.03] px-3 py-2 text-slate-200 transition hover:bg-white/[0.06]"
+                onClick={() => setIsDropdownOpen((prev) => !prev)}
+                className="flex items-center gap-3 rounded-full border border-white/10 bg-white/[0.03] px-3 py-2 text-slate-200 transition"
               >
                 <Avatar className="h-9 w-9 border border-white/10">
                   <AvatarImage src={user?.image} alt={user?.name || "User profile"} className="object-cover" />
@@ -149,32 +161,34 @@ const Navbar = () => {
                   </span>
                   <span className="block text-xs capitalize text-slate-400">{role}</span>
                 </span>
-                <ChevronDown className="h-4 w-4 text-slate-400 transition group-hover:text-slate-200" />
+                <ChevronDown className="h-4 w-4 text-slate-400 transition" />
               </button>
 
-              <div className="pointer-events-none absolute right-0 top-full z-50 mt-3 w-52 translate-y-2 rounded-[1.2rem] border border-white/10 bg-[#0b1220]/96 p-2 opacity-0 shadow-[0_24px_60px_-28px_rgba(0,0,0,0.85)] backdrop-blur transition duration-200 group-hover:pointer-events-auto group-hover:translate-y-0 group-hover:opacity-100">
-                <div className="border-b border-white/10 px-3 py-2">
-                  <p className="truncate text-sm font-medium text-white">{user?.name || user?.email}</p>
-                  <p className="text-xs capitalize text-slate-400">{role}</p>
-                </div>
+              {isDropdownOpen && (
+                <div className="absolute right-0 top-full z-50 mt-3 w-52 rounded-[1.2rem] border border-white/10 bg-[#0b1220]/96 p-2 shadow-[0_24px_60px_-28px_rgba(0,0,0,0.85)] backdrop-blur">
+                  <div className="border-b border-white/10 px-3 py-2">
+                    <p className="truncate text-sm font-medium text-white">{user?.name || user?.email}</p>
+                    <p className="text-xs capitalize text-slate-400">{role}</p>
+                  </div>
 
-                <button
-                  type="button"
-                  onClick={() => setIsEditProfileOpen(true)}
-                  className="mt-2 flex w-full items-center gap-2 rounded-xl px-3 py-2 text-sm font-medium text-slate-200 transition hover:bg-white/[0.06]"
-                >
-                  <Settings className="h-4 w-4 text-slate-400" />
-                  Edit profile
-                </button>
-                <button
-                  type="button"
-                  onClick={handleLogout}
-                  className="mt-1 flex w-full items-center gap-2 rounded-xl px-3 py-2 text-sm font-medium text-red-300 transition hover:bg-red-500/10"
-                >
-                  <LogOut className="h-4 w-4" />
-                  Logout
-                </button>
-              </div>
+                  <button
+                    type="button"
+                    onClick={() => { setIsEditProfileOpen(true); setIsDropdownOpen(false); }}
+                    className="mt-2 flex w-full items-center gap-2 rounded-xl px-3 py-2 text-sm font-medium text-slate-200 transition hover:bg-white/[0.06]"
+                  >
+                    <Settings className="h-4 w-4 text-slate-400" />
+                    Edit profile
+                  </button>
+                  <button
+                    type="button"
+                    onClick={handleLogout}
+                    className="mt-1 flex w-full items-center gap-2 rounded-xl px-3 py-2 text-sm font-medium text-red-300 transition hover:bg-red-500/10"
+                  >
+                    <LogOut className="h-4 w-4" />
+                    Logout
+                  </button>
+                </div>
+              )}
             </div>
           )}
         </nav>

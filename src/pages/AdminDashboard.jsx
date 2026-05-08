@@ -126,15 +126,15 @@ const AdminDashboard = () => {
     onError: (error) => toast.error(error.response?.data?.message || 'Unable to suspend user.'),
   });
 
-  const totalRevenue = bookings.reduce((sum, b) => sum + (b.total_amount || 0), 0);
-  const platformFees = bookings.reduce((sum, b) => sum + (b.platform_fee || 0), 0);
+  const totalRevenue = bookings.reduce((sum, b) => sum + parseFloat(b.total_amount || 0), 0);
+  const platformFees = bookings.reduce((sum, b) => sum + parseFloat(b.platform_fee || 0), 0);
   const activeBookings = bookings.filter(b => b.status === 'active' || b.status === 'booked').length;
   
   const stats = [
     { label: 'Pending Approvals', value: pendingLocations.length, icon: Clock3, color: 'from-amber-500 to-orange-500', trend: 12, delay: 0 },
     { label: 'Active Locations', value: allLocations.filter(l => l.status === 'approved').length, icon: Building2, color: 'from-emerald-500 to-teal-500', trend: 8, delay: 0.1 },
     { label: 'Total Users', value: users.length, icon: Users, color: 'from-blue-500 to-cyan-500', trend: 15, delay: 0.2 },
-    { label: 'Platform Revenue', value: `₹${platformFees.toLocaleString()}`, icon: Wallet, color: 'from-purple-500 to-pink-500', trend: 22, delay: 0.3 },
+    { label: 'Platform Revenue', value: `₹${platformFees.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`, icon: Wallet, color: 'from-purple-500 to-pink-500', trend: 22, delay: 0.3 },
   ];
 
   const filteredLocations = allLocations.filter(loc => 
@@ -474,8 +474,8 @@ const AdminDashboard = () => {
                               <TableCell className="text-white/80">{b.parking_name}</TableCell>
                               <TableCell className="text-white/60">{new Date(b.created_at).toLocaleDateString()}</TableCell>
                               <TableCell><StatusBadge status={b.status} /></TableCell>
-                              <TableCell className="text-right text-orange-400 font-semibold">₹{b.platform_fee || 0}</TableCell>
-                              <TableCell className="text-right font-bold text-white">₹{b.total_amount || 0}</TableCell>
+                              <TableCell className="text-right text-orange-400 font-semibold">₹{parseFloat(b.platform_fee || 0).toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</TableCell>
+                              <TableCell className="text-right font-bold text-white">₹{parseFloat(b.total_amount || 0).toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</TableCell>
                             </TableRow>
                           ))
                         ) : (
